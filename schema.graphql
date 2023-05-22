@@ -43,7 +43,7 @@ type Query {
   loginWithPassword(email: String!, password: String!): AuthPayLoad!
   pushNewUserToNotion(email: String!, name: String!): ResponseMessage!
   searchUserByEmail(email: String!): User
-  sendNewUserEmail(email: String!): ResponseMessage!
+  sendNewUserEmail(email: String!, name: String!): ResponseMessage!
   verifyEmailOtp(email: String!, otp: String!): AuthPayLoad!
 }
 

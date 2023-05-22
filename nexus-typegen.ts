@@ -275,6 +275,7 @@ export interface NexusGenArgTypes {
     }
     sendNewUserEmail: { // args
       email: string; // String!
+      name: string; // String!
     }
     verifyEmailOtp: { // args
       email: string; // String!
