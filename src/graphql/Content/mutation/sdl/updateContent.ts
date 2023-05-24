@@ -42,11 +42,11 @@ export const updateContent = extendType({
           const response = await prisma.content.update({
             where: { id: content.id },
             data: {
-              title,
-              voiceNoteUrl,
-              transcript,
-              gptGenerated,
-              typeOfPromptId,
+              title: title ?? content.title,
+              voiceNoteUrl: voiceNoteUrl ?? content.voiceNoteUrl,
+              transcript: transcript ?? content.transcript,
+              gptGenerated: gptGenerated ?? content.gptGenerated,
+              typeOfPromptId: typeOfPromptId ?? content.typeOfPromptId,
             },
           });
 
