@@ -134,6 +134,8 @@ export interface NexusGenFieldTypes {
     getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
+    getUserInfo: NexusGenRootTypes['User']; // User!
+    getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     loginWithPassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     pushNewUserToNotion: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
@@ -194,6 +196,8 @@ export interface NexusGenFieldTypeNames {
     getEmailOtp: 'ResponseMessage'
     getOneContent: 'Content'
     getTypeOfPromptFromId: 'TypeOfPrompt'
+    getUserInfo: 'User'
+    getUserSubscription: 'UserSubscription'
     loginWithPassword: 'AuthPayLoad'
     pushNewUserToNotion: 'ResponseMessage'
     searchUserByEmail: 'User'

@@ -40,6 +40,8 @@ type Query {
   getEmailOtp(email: String!): ResponseMessage!
   getOneContent(contentId: String!): Content!
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
+  getUserInfo: User!
+  getUserSubscription: UserSubscription!
   loginWithPassword(email: String!, password: String!): AuthPayLoad!
   pushNewUserToNotion(email: String!, name: String!): ResponseMessage!
   searchUserByEmail(email: String!): User
