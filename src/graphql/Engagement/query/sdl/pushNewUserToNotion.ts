@@ -10,7 +10,7 @@ export const pushNewUserToNotion = extendType({
         name: nonNull(stringArg()),
       },
 
-      async resolve(__, { email, name }, { notionInternal }, ___) {
+      async resolve(__, { email, name }, { notionInternal, prisma }, ___) {
         try {
           const response = await notionInternal.pages.create({
             parent: {
@@ -35,6 +35,11 @@ export const pushNewUserToNotion = extendType({
                 },
               },
             },
+          });
+
+          await prisma.user.update({
+            where: { email },
+            data: { notionPageId: response.id },
           });
 
           return { response: JSON.stringify(response) };

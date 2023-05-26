@@ -14,6 +14,7 @@ model User {
     password            String?
     accessToken         String?
     createdAt           DateTime
+    notionPageId        String?
     signInProvider      SignInProvider
     subscription        Subscription?
     content             Content[]
