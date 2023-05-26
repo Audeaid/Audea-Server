@@ -82,6 +82,7 @@ export const createNewUserSubscription = extendType({
             startDate: response.startDate,
             endDate: response.endDate,
             userId: response.userId,
+            extended: response.extended,
             user,
           };
         } catch (e) {
