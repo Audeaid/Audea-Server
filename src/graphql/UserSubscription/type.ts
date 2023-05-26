@@ -14,6 +14,7 @@ export const UserSubscription = objectType({
       type: 'User',
     });
     t.nonNull.string('userId');
+    t.nonNull.boolean('extended');
   },
 });
 

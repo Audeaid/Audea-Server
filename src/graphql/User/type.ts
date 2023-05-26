@@ -17,3 +17,11 @@ export const SignInProviderEnum = enumType({
   name: 'SignInProviderEnum',
   members: ['GOOGLE', 'MICROSOFT', 'APPLE', 'PASSWORD'],
 });
+
+export const DeletedUser = objectType({
+  name: 'DeletedUser',
+  definition(t) {
+    t.nonNull.string('id');
+    t.nonNull.string('email');
+  },
+});

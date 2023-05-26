@@ -26,6 +26,7 @@ export const getUserSubscription = extendType({
             endDate: userSubscription.endDate,
             user,
             userId: user.id,
+            extended: userSubscription.extended,
           };
         } catch (error) {
           throw error;

@@ -73,6 +73,10 @@ export interface NexusGenObjects {
     content: NexusGenRootTypes['Content']; // Content!
     mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
   }
+  DeletedUser: { // root type
+    email: string; // String!
+    id: string; // String!
+  }
   Mutation: {};
   Query: {};
   ResponseMessage: { // root type
@@ -95,6 +99,7 @@ export interface NexusGenObjects {
   UserSubscription: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     endDate: NexusGenScalars['DateTime']; // DateTime!
+    extended: boolean; // Boolean!
     id: string; // String!
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
@@ -131,10 +136,15 @@ export interface NexusGenFieldTypes {
     content: NexusGenRootTypes['Content']; // Content!
     mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
   }
+  DeletedUser: { // field return type
+    email: string; // String!
+    id: string; // String!
+  }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     editEmail: NexusGenRootTypes['User']; // User!
     editUserInfo: NexusGenRootTypes['User']; // User!
@@ -144,6 +154,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
+    getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
@@ -177,6 +188,7 @@ export interface NexusGenFieldTypes {
   UserSubscription: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     endDate: NexusGenScalars['DateTime']; // DateTime!
+    extended: boolean; // Boolean!
     id: string; // String!
     startDate: NexusGenScalars['DateTime']; // DateTime!
     type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
@@ -203,10 +215,15 @@ export interface NexusGenFieldTypeNames {
     content: 'Content'
     mutationType: 'typeOfMutationType'
   }
+  DeletedUser: { // field return type name
+    email: 'String'
+    id: 'String'
+  }
   Mutation: { // field return type name
     changePassword: 'AuthPayLoad'
     createNewContent: 'Content'
     createNewUserSubscription: 'UserSubscription'
+    deleteAccount: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
     editEmail: 'User'
     editUserInfo: 'User'
@@ -216,6 +233,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getAllContent: 'Content'
+    getDeletedUser: 'DeletedUser'
     getEmailOtp: 'ResponseMessage'
     getOneContent: 'Content'
     getTypeOfPromptFromId: 'TypeOfPrompt'
@@ -249,6 +267,7 @@ export interface NexusGenFieldTypeNames {
   UserSubscription: { // field return type name
     createdAt: 'DateTime'
     endDate: 'DateTime'
+    extended: 'Boolean'
     id: 'String'
     startDate: 'DateTime'
     type: 'SubscriptionTypeEnum'
@@ -293,6 +312,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getDeletedUser: { // args
+      email: string; // String!
+    }
     getEmailOtp: { // args
       email: string; // String!
     }

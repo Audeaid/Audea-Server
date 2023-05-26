@@ -21,6 +21,11 @@ model User {
     notionAccount       NotionAccount?
 }
 
+model DeletedAccount {
+    id                  String          @id @default(auto()) @map("_id") @db.ObjectId
+    email               String          @unique
+}
+
 enum SignInProvider {
     GOOGLE
     MICROSOFT
