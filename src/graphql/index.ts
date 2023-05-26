@@ -1,4 +1,4 @@
-// export * from './Enum';
+export * from './Enum';
 export * from './ScalarType';
 export * from './ObjectType';
 

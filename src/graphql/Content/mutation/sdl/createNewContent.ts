@@ -1,4 +1,5 @@
 import { extendType } from 'nexus';
+import { subscriptionStr } from '../../subscription/subscriptionStr';
 
 export const createNewContent = extendType({
   type: 'Mutation',
@@ -6,7 +7,7 @@ export const createNewContent = extendType({
     t.nonNull.field('createNewContent', {
       type: 'Content',
 
-      async resolve(__, ____, { prisma, userId }, ___) {
+      async resolve(__, ____, { prisma, userId, pubsub }, ___) {
         try {
           if (!userId) throw new Error('Invalid token.');
 
@@ -19,6 +20,11 @@ export const createNewContent = extendType({
               createdAt: new Date(),
               userId: user.id,
             },
+          });
+
+          await pubsub.publish(subscriptionStr(user.id), {
+            mutationType: 'ADD',
+            content: content,
           });
 
           return {

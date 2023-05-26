@@ -42,6 +42,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   SignInProviderEnum: "APPLE" | "GOOGLE" | "MICROSOFT" | "PASSWORD"
   SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
+  typeOfMutationType: "ADD" | "DELETE" | "EDIT"
 }
 
 export interface NexusGenScalars {
@@ -68,11 +69,16 @@ export interface NexusGenObjects {
     userId: string; // String!
     voiceNoteUrl?: string | null; // String
   }
+  ContentSubscriptionType: { // root type
+    content: NexusGenRootTypes['Content']; // Content!
+    mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
+  }
   Mutation: {};
   Query: {};
   ResponseMessage: { // root type
     response?: string | null; // String
   }
+  Subscription: {};
   TypeOfPrompt: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     displayName: string; // String!
@@ -121,10 +127,17 @@ export interface NexusGenFieldTypes {
     userId: string; // String!
     voiceNoteUrl: string | null; // String
   }
+  ContentSubscriptionType: { // field return type
+    content: NexusGenRootTypes['Content']; // Content!
+    mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
+  }
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    editEmail: NexusGenRootTypes['User']; // User!
+    editUserInfo: NexusGenRootTypes['User']; // User!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     signUpWithPassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     updateContent: NexusGenRootTypes['Content']; // Content!
@@ -144,6 +157,9 @@ export interface NexusGenFieldTypes {
   }
   ResponseMessage: { // field return type
     response: string | null; // String
+  }
+  Subscription: { // field return type
+    contentSubscription: NexusGenRootTypes['ContentSubscriptionType'] | null; // ContentSubscriptionType
   }
   TypeOfPrompt: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -183,10 +199,17 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
     voiceNoteUrl: 'String'
   }
+  ContentSubscriptionType: { // field return type name
+    content: 'Content'
+    mutationType: 'typeOfMutationType'
+  }
   Mutation: { // field return type name
     changePassword: 'AuthPayLoad'
     createNewContent: 'Content'
     createNewUserSubscription: 'UserSubscription'
+    deleteContent: 'ResponseMessage'
+    editEmail: 'User'
+    editUserInfo: 'User'
     extendTrialSubscription: 'UserSubscription'
     signUpWithPassword: 'AuthPayLoad'
     updateContent: 'Content'
@@ -206,6 +229,9 @@ export interface NexusGenFieldTypeNames {
   }
   ResponseMessage: { // field return type name
     response: 'String'
+  }
+  Subscription: { // field return type name
+    contentSubscription: 'ContentSubscriptionType'
   }
   TypeOfPrompt: { // field return type name
     createdAt: 'DateTime'
@@ -240,6 +266,16 @@ export interface NexusGenArgTypes {
     }
     createNewUserSubscription: { // args
       type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
+    }
+    deleteContent: { // args
+      contentId: string; // String!
+    }
+    editEmail: { // args
+      email: string; // String!
+      jwtToken: string; // String!
+    }
+    editUserInfo: { // args
+      name?: string | null; // String
     }
     signUpWithPassword: { // args
       email: string; // String!
@@ -284,6 +320,11 @@ export interface NexusGenArgTypes {
     verifyEmailOtp: { // args
       email: string; // String!
       otp: string; // String!
+    }
+  }
+  Subscription: {
+    contentSubscription: { // args
+      userId: string; // String!
     }
   }
 }

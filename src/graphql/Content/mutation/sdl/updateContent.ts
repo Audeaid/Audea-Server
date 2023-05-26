@@ -1,5 +1,6 @@
 import { extendType, nonNull } from 'nexus';
 import { stringArg } from 'nexus';
+import { subscriptionStr } from '../../subscription/subscriptionStr';
 
 export const updateContent = extendType({
   type: 'Mutation',
@@ -25,7 +26,7 @@ export const updateContent = extendType({
           gptGenerated,
           typeOfPromptId,
         },
-        { prisma, userId },
+        { prisma, userId, pubsub },
         ___
       ) {
         try {
@@ -48,6 +49,11 @@ export const updateContent = extendType({
               gptGenerated: gptGenerated ?? content.gptGenerated,
               typeOfPromptId: typeOfPromptId ?? content.typeOfPromptId,
             },
+          });
+
+          await pubsub.publish(subscriptionStr(user.id), {
+            mutationType: 'EDIT',
+            content: response,
           });
 
           return {

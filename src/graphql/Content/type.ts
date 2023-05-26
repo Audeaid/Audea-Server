@@ -16,3 +16,15 @@ export const Content = objectType({
     // })
   },
 });
+
+export const ContentSubscriptionType = objectType({
+  name: 'ContentSubscriptionType',
+  definition(t) {
+    t.nonNull.field('mutationType', {
+      type: 'typeOfMutationType',
+      description: 'The type of mutationType. Either `ADD` `EDIT` or `DELETE`',
+    });
+
+    t.nonNull.field('content', { type: 'Content' });
+  },
+});

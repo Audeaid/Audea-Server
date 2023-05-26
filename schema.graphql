@@ -18,6 +18,13 @@ type Content {
   voiceNoteUrl: String
 }
 
+type ContentSubscriptionType {
+  content: Content!
+
+  """The type of mutationType. Either `ADD` `EDIT` or `DELETE`"""
+  mutationType: typeOfMutationType!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-time format.
 """
@@ -30,6 +37,9 @@ type Mutation {
   changePassword(email: String!, jwtToken: String!, password: String!): AuthPayLoad!
   createNewContent: Content!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
+  deleteContent(contentId: String!): ResponseMessage!
+  editEmail(email: String!, jwtToken: String!): User!
+  editUserInfo(name: String): User!
   extendTrialSubscription: UserSubscription!
   signUpWithPassword(email: String!, jwtToken: String!, name: String!, password: String!): AuthPayLoad!
   updateContent(contentId: String!, gptGenerated: String, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String): Content!
@@ -59,6 +69,11 @@ enum SignInProviderEnum {
   GOOGLE
   MICROSOFT
   PASSWORD
+}
+
+type Subscription {
+  """Subscription for content"""
+  contentSubscription(userId: String!): ContentSubscriptionType
 }
 
 enum SubscriptionTypeEnum {
@@ -92,4 +107,10 @@ type UserSubscription {
   type: SubscriptionTypeEnum!
   user: User!
   userId: String!
+}
+
+enum typeOfMutationType {
+  ADD
+  DELETE
+  EDIT
 }
