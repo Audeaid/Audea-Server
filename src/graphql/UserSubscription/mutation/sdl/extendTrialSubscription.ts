@@ -25,13 +25,12 @@ export const extendTrialSubscription = extendType({
           if (subscription.extended) throw new Error('Already extended trial!');
 
           const now = new Date();
-          const endDate = moment(now).add('7', 'days').toLocaleString();
-          const startDate = moment(now).toLocaleString();
+          const endDate = new Date(moment(now).add('7', 'days').toISOString());
 
           const response = await prisma.subscription.update({
             where: { id: subscription.id },
             data: {
-              startDate,
+              startDate: now,
               endDate,
               extended: true,
             },
