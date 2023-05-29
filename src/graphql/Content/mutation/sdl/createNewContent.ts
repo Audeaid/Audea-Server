@@ -36,6 +36,8 @@ export const createNewContent = extendType({
             gptGenerated: content.gptGenerated,
             typeOfPromptId: content.typeOfPromptId,
             userId: user.id,
+            writingStyle: content.writingStyle,
+            outputLanguage: content.outputLanguage,
           };
         } catch (e) {
           throw e;

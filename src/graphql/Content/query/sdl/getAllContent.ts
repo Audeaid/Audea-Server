@@ -32,6 +32,8 @@ export const getAllContent = extendType({
                 gptGenerated: val.gptGenerated,
                 typeOfPromptId: val.typeOfPromptId,
                 userId: user.id,
+                writingStyle: val.writingStyle,
+                outputLanguage: val.outputLanguage,
               };
             });
           }

@@ -11,11 +11,13 @@ type Content {
   createdAt: DateTime!
   gptGenerated: String
   id: String!
+  outputLanguage: OutputLanguageEnum
   title: String
   transcript: String
   typeOfPromptId: String
   userId: String!
   voiceNoteUrl: String
+  writingStyle: String
 }
 
 type ContentSettings {
@@ -61,7 +63,7 @@ type Mutation {
   editUserInfo(name: String): User!
   extendTrialSubscription: UserSubscription!
   signUpWithPassword(email: String!, jwtToken: String!, name: String!, password: String!): AuthPayLoad!
-  updateContent(contentId: String!, gptGenerated: String, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String): Content!
+  updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
 }
 

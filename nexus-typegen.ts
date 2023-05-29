@@ -64,11 +64,13 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     gptGenerated?: string | null; // String
     id: string; // String!
+    outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
     title?: string | null; // String
     transcript?: string | null; // String
     typeOfPromptId?: string | null; // String
     userId: string; // String!
     voiceNoteUrl?: string | null; // String
+    writingStyle?: string | null; // String
   }
   ContentSettings: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -138,11 +140,13 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     gptGenerated: string | null; // String
     id: string; // String!
+    outputLanguage: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
     title: string | null; // String
     transcript: string | null; // String
     typeOfPromptId: string | null; // String
     userId: string; // String!
     voiceNoteUrl: string | null; // String
+    writingStyle: string | null; // String
   }
   ContentSettings: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -232,11 +236,13 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     gptGenerated: 'String'
     id: 'String'
+    outputLanguage: 'OutputLanguageEnum'
     title: 'String'
     transcript: 'String'
     typeOfPromptId: 'String'
     userId: 'String'
     voiceNoteUrl: 'String'
+    writingStyle: 'String'
   }
   ContentSettings: { // field return type name
     createdAt: 'DateTime'
@@ -347,10 +353,12 @@ export interface NexusGenArgTypes {
     updateContent: { // args
       contentId: string; // String!
       gptGenerated?: string | null; // String
+      outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
       title?: string | null; // String
       transcript?: string | null; // String
       typeOfPromptId?: string | null; // String
       voiceNoteUrl?: string | null; // String
+      writingStyle?: string | null; // String
     }
     updateContentSettings: { // args
       outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum

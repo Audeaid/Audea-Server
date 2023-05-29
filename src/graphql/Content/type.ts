@@ -11,6 +11,8 @@ export const Content = objectType({
     t.string('gptGenerated');
     t.string('typeOfPromptId');
     t.nonNull.string('userId');
+    t.string('writingStyle');
+    t.field('outputLanguage', { type: 'OutputLanguageEnum' });
     // t.field('generatedNotionPage', {
     //     type: 'GeneratedNotionPage'
     // })

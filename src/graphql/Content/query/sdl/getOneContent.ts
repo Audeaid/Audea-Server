@@ -31,6 +31,8 @@ export const getOneContent = extendType({
             gptGenerated: content.gptGenerated,
             typeOfPromptId: content.typeOfPromptId,
             userId: user.id,
+            writingStyle: content.writingStyle,
+            outputLanguage: content.outputLanguage,
           };
         } catch (error) {
           throw error;

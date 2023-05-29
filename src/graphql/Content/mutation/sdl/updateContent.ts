@@ -1,4 +1,4 @@
-import { extendType, nonNull } from 'nexus';
+import { arg, extendType, nonNull } from 'nexus';
 import { stringArg } from 'nexus';
 import { subscriptionStr } from '../../subscription/subscriptionStr';
 
@@ -14,6 +14,8 @@ export const updateContent = extendType({
         transcript: stringArg(),
         gptGenerated: stringArg(),
         typeOfPromptId: stringArg(),
+        writingStyle: stringArg(),
+        outputLanguage: arg({ type: 'OutputLanguageEnum' }),
       },
 
       async resolve(
@@ -25,6 +27,8 @@ export const updateContent = extendType({
           transcript,
           gptGenerated,
           typeOfPromptId,
+          writingStyle,
+          outputLanguage,
         },
         { prisma, userId, pubsub },
         ___
@@ -37,7 +41,9 @@ export const updateContent = extendType({
             !voiceNoteUrl &&
             !transcript &&
             !gptGenerated &&
-            !typeOfPromptId
+            !typeOfPromptId &&
+            !writingStyle &&
+            !outputLanguage
           )
             throw new Error('Cannot have all value null!');
 
@@ -57,6 +63,8 @@ export const updateContent = extendType({
               transcript: transcript ?? content.transcript,
               gptGenerated: gptGenerated ?? content.gptGenerated,
               typeOfPromptId: typeOfPromptId ?? content.typeOfPromptId,
+              writingStyle: writingStyle ?? content.writingStyle,
+              outputLanguage: outputLanguage ?? content.outputLanguage,
             },
           });
 
@@ -74,6 +82,8 @@ export const updateContent = extendType({
             gptGenerated: response.gptGenerated,
             typeOfPromptId: response.typeOfPromptId,
             userId: user.id,
+            writingStyle: response.writingStyle,
+            outputLanguage: response.outputLanguage,
           };
         } catch (e) {
           throw e;
