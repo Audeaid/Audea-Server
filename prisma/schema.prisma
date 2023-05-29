@@ -87,7 +87,7 @@ model ContentSettings {
     writingStyle            String
     outputLanguage          OutputLanguage
     typeOfPrompt            TypeOfPrompt        @relation(fields: [typeOfPromptId], references: [id])
-    typeOfPromptId          String              @unique @db.ObjectId
+    typeOfPromptId          String              @db.ObjectId
 }
 
 enum OutputLanguage {
