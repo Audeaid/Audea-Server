@@ -32,6 +32,15 @@ export const updateContent = extendType({
         try {
           if (!userId) throw new Error('Invalid token.');
 
+          if (
+            !title &&
+            !voiceNoteUrl &&
+            !transcript &&
+            !gptGenerated &&
+            !typeOfPromptId
+          )
+            throw new Error('Cannot have all value null!');
+
           const user = await prisma.user.findFirstOrThrow({
             where: { id: userId },
           });

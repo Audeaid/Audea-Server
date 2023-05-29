@@ -40,6 +40,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  OutputLanguageEnum: "ARABIC" | "ASK" | "BAHASAINDONESIA" | "CHINESE" | "ENGLISH" | "FRENCH" | "HINDI" | "JAPANESE" | "RUSSIAN" | "SPANISH" | "TRANSCRIPT" | "URDU"
   SignInProviderEnum: "APPLE" | "GOOGLE" | "MICROSOFT" | "PASSWORD"
   SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
   typeOfMutationType: "ADD" | "DELETE" | "EDIT"
@@ -68,6 +69,17 @@ export interface NexusGenObjects {
     typeOfPromptId?: string | null; // String
     userId: string; // String!
     voiceNoteUrl?: string | null; // String
+  }
+  ContentSettings: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    lastUpdate: NexusGenScalars['DateTime']; // DateTime!
+    outputLanguage: NexusGenEnums['OutputLanguageEnum']; // OutputLanguageEnum!
+    typeOfPrompt: NexusGenRootTypes['TypeOfPrompt']; // TypeOfPrompt!
+    typeOfPromptId: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+    writingStyle: string; // String!
   }
   ContentSubscriptionType: { // root type
     content: NexusGenRootTypes['Content']; // Content!
@@ -132,6 +144,17 @@ export interface NexusGenFieldTypes {
     userId: string; // String!
     voiceNoteUrl: string | null; // String
   }
+  ContentSettings: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    lastUpdate: NexusGenScalars['DateTime']; // DateTime!
+    outputLanguage: NexusGenEnums['OutputLanguageEnum']; // OutputLanguageEnum!
+    typeOfPrompt: NexusGenRootTypes['TypeOfPrompt']; // TypeOfPrompt!
+    typeOfPromptId: string; // String!
+    user: NexusGenRootTypes['User']; // User!
+    userId: string; // String!
+    writingStyle: string; // String!
+  }
   ContentSubscriptionType: { // field return type
     content: NexusGenRootTypes['Content']; // Content!
     mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
@@ -143,6 +166,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     changePassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     createNewContent: NexusGenRootTypes['Content']; // Content!
+    createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
@@ -151,9 +175,12 @@ export interface NexusGenFieldTypes {
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     signUpWithPassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     updateContent: NexusGenRootTypes['Content']; // Content!
+    updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
   }
   Query: { // field return type
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
+    getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
+    getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
@@ -211,6 +238,17 @@ export interface NexusGenFieldTypeNames {
     userId: 'String'
     voiceNoteUrl: 'String'
   }
+  ContentSettings: { // field return type name
+    createdAt: 'DateTime'
+    id: 'String'
+    lastUpdate: 'DateTime'
+    outputLanguage: 'OutputLanguageEnum'
+    typeOfPrompt: 'TypeOfPrompt'
+    typeOfPromptId: 'String'
+    user: 'User'
+    userId: 'String'
+    writingStyle: 'String'
+  }
   ContentSubscriptionType: { // field return type name
     content: 'Content'
     mutationType: 'typeOfMutationType'
@@ -222,6 +260,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     changePassword: 'AuthPayLoad'
     createNewContent: 'Content'
+    createNewContentSettings: 'ContentSettings'
     createNewUserSubscription: 'UserSubscription'
     deleteAccount: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
@@ -230,9 +269,12 @@ export interface NexusGenFieldTypeNames {
     extendTrialSubscription: 'UserSubscription'
     signUpWithPassword: 'AuthPayLoad'
     updateContent: 'Content'
+    updateContentSettings: 'ContentSettings'
   }
   Query: { // field return type name
     getAllContent: 'Content'
+    getAllTypeOfPrompt: 'TypeOfPrompt'
+    getContentSettings: 'ContentSettings'
     getDeletedUser: 'DeletedUser'
     getEmailOtp: 'ResponseMessage'
     getOneContent: 'Content'
@@ -309,6 +351,11 @@ export interface NexusGenArgTypes {
       transcript?: string | null; // String
       typeOfPromptId?: string | null; // String
       voiceNoteUrl?: string | null; // String
+    }
+    updateContentSettings: { // args
+      outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
+      typeOfPromptId?: string | null; // String
+      writingStyle?: string | null; // String
     }
   }
   Query: {

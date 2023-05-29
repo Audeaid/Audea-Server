@@ -46,6 +46,8 @@ export const deleteAccount = extendType({
 
           await prisma.subscription.delete({ where: { userId: user.id } });
 
+          await prisma.contentSettings.delete({ where: { userId: user.id } });
+
           if (user.notionPageId !== null) {
             await notionInternal.pages.update({
               page_id: user.notionPageId,

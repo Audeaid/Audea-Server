@@ -18,6 +18,18 @@ type Content {
   voiceNoteUrl: String
 }
 
+type ContentSettings {
+  createdAt: DateTime!
+  id: String!
+  lastUpdate: DateTime!
+  outputLanguage: OutputLanguageEnum!
+  typeOfPrompt: TypeOfPrompt!
+  typeOfPromptId: String!
+  user: User!
+  userId: String!
+  writingStyle: String!
+}
+
 type ContentSubscriptionType {
   content: Content!
 
@@ -41,6 +53,7 @@ scalar File
 type Mutation {
   changePassword(email: String!, jwtToken: String!, password: String!): AuthPayLoad!
   createNewContent: Content!
+  createNewContentSettings: ContentSettings!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
   deleteAccount: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
@@ -49,10 +62,28 @@ type Mutation {
   extendTrialSubscription: UserSubscription!
   signUpWithPassword(email: String!, jwtToken: String!, name: String!, password: String!): AuthPayLoad!
   updateContent(contentId: String!, gptGenerated: String, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String): Content!
+  updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
+}
+
+enum OutputLanguageEnum {
+  ARABIC
+  ASK
+  BAHASAINDONESIA
+  CHINESE
+  ENGLISH
+  FRENCH
+  HINDI
+  JAPANESE
+  RUSSIAN
+  SPANISH
+  TRANSCRIPT
+  URDU
 }
 
 type Query {
   getAllContent: [Content!]
+  getAllTypeOfPrompt: [TypeOfPrompt!]!
+  getContentSettings: ContentSettings
   getDeletedUser(email: String!): DeletedUser
   getEmailOtp(email: String!): ResponseMessage!
   getOneContent(contentId: String!): Content!
