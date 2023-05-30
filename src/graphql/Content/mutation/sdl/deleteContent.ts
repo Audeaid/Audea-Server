@@ -11,7 +11,7 @@ export const deleteContent = extendType({
         contentId: nonNull(stringArg()),
       },
 
-      async resolve(__, { contentId }, { prisma, userId, pubsub }, ___) {
+      async resolve(__, { contentId }, { prisma, userId, pubsub, s3 }, ___) {
         try {
           if (!userId) throw new Error('Invalid token.');
 
@@ -22,6 +22,15 @@ export const deleteContent = extendType({
           const content = await prisma.content.findFirstOrThrow({
             where: { id: contentId },
           });
+
+          if (content.voiceNoteUrl) {
+            await s3
+              .deleteObject({
+                Bucket: 'audea-voice-note',
+                Key: content.voiceNoteUrl.split('/').pop() as string,
+              })
+              .promise();
+          }
 
           await pubsub.publish(subscriptionStr(user.id), {
             mutationType: 'DELETE',
