@@ -18,7 +18,8 @@ import { expressMiddleware } from '@apollo/server/express4';
     server: httpServer,
     path: '/graphql',
   });
-  const serverCleanup = useServer({ schema }, wsServer);
+
+  const serverCleanup = useServer({ schema, context }, wsServer);
 
   const PORT = (process.env.PORT as unknown as number) || 8080;
 

@@ -9,3 +9,4 @@ export * from './UserSubscription';
 export * from './Content';
 export * from './TypeOfPrompt';
 export * from './ContentSettings';
+export * from './DarkMode';

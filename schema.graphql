@@ -44,6 +44,12 @@ type ContentSubscriptionType {
   mutationType: typeOfMutationType!
 }
 
+type DarkMode {
+  darkMode: Boolean!
+  id: String!
+  userId: String!
+}
+
 """
 A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the date-time format.
 """
@@ -60,6 +66,7 @@ scalar File
 type Mutation {
   createNewContent: Content!
   createNewContentSettings: ContentSettings!
+  createNewDarkModePreferences(darkMode: Boolean): DarkMode!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
   createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!): User!
   deleteAccount: ResponseMessage!
@@ -67,6 +74,7 @@ type Mutation {
   extendTrialSubscription: UserSubscription!
   updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
+  updateDarkModePreferences(darkMode: Boolean!): DarkMode!
 }
 
 enum OutputLanguageEnum {
@@ -89,6 +97,7 @@ type Query {
   getAllTypeOfPrompt: [TypeOfPrompt!]!
   getClerkSessionId(jwtToken: String!): ClerkPayLoad!
   getContentSettings: ContentSettings
+  getDarkModePreferences: DarkMode
   getDeletedUser(email: String!): DeletedUser
   getEmailOtp(email: String!): ResponseMessage!
   getOneContent(contentId: String!): Content!
@@ -110,6 +119,9 @@ type ResponseMessage {
 type Subscription {
   """Subscription for content"""
   contentSubscription(clerkUserId: String!): ContentSubscriptionType
+
+  """Subscription for darkMode"""
+  darkModeSubscription(clerkUserId: String!): DarkMode
 }
 
 enum SubscriptionTypeEnum {

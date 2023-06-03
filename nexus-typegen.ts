@@ -89,6 +89,11 @@ export interface NexusGenObjects {
     content: NexusGenRootTypes['Content']; // Content!
     mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
   }
+  DarkMode: { // root type
+    darkMode: boolean; // Boolean!
+    id: string; // String!
+    userId: string; // String!
+  }
   DeletedUser: { // root type
     email: string; // String!
     id: string; // String!
@@ -170,6 +175,11 @@ export interface NexusGenFieldTypes {
     content: NexusGenRootTypes['Content']; // Content!
     mutationType: NexusGenEnums['typeOfMutationType']; // typeOfMutationType!
   }
+  DarkMode: { // field return type
+    darkMode: boolean; // Boolean!
+    id: string; // String!
+    userId: string; // String!
+  }
   DeletedUser: { // field return type
     email: string; // String!
     id: string; // String!
@@ -177,6 +187,7 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
+    createNewDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     createUserFromClerk: NexusGenRootTypes['User']; // User!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
@@ -184,12 +195,14 @@ export interface NexusGenFieldTypes {
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
+    updateDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
   }
   Query: { // field return type
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
     getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
     getClerkSessionId: NexusGenRootTypes['ClerkPayLoad']; // ClerkPayLoad!
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
+    getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
@@ -207,6 +220,7 @@ export interface NexusGenFieldTypes {
   }
   Subscription: { // field return type
     contentSubscription: NexusGenRootTypes['ContentSubscriptionType'] | null; // ContentSubscriptionType
+    darkModeSubscription: NexusGenRootTypes['DarkMode'] | null; // DarkMode
   }
   TypeOfPrompt: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -269,6 +283,11 @@ export interface NexusGenFieldTypeNames {
     content: 'Content'
     mutationType: 'typeOfMutationType'
   }
+  DarkMode: { // field return type name
+    darkMode: 'Boolean'
+    id: 'String'
+    userId: 'String'
+  }
   DeletedUser: { // field return type name
     email: 'String'
     id: 'String'
@@ -276,6 +295,7 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createNewContent: 'Content'
     createNewContentSettings: 'ContentSettings'
+    createNewDarkModePreferences: 'DarkMode'
     createNewUserSubscription: 'UserSubscription'
     createUserFromClerk: 'User'
     deleteAccount: 'ResponseMessage'
@@ -283,12 +303,14 @@ export interface NexusGenFieldTypeNames {
     extendTrialSubscription: 'UserSubscription'
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
+    updateDarkModePreferences: 'DarkMode'
   }
   Query: { // field return type name
     getAllContent: 'Content'
     getAllTypeOfPrompt: 'TypeOfPrompt'
     getClerkSessionId: 'ClerkPayLoad'
     getContentSettings: 'ContentSettings'
+    getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
     getEmailOtp: 'ResponseMessage'
     getOneContent: 'Content'
@@ -306,6 +328,7 @@ export interface NexusGenFieldTypeNames {
   }
   Subscription: { // field return type name
     contentSubscription: 'ContentSubscriptionType'
+    darkModeSubscription: 'DarkMode'
   }
   TypeOfPrompt: { // field return type name
     createdAt: 'DateTime'
@@ -336,6 +359,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    createNewDarkModePreferences: { // args
+      darkMode?: boolean | null; // Boolean
+    }
     createNewUserSubscription: { // args
       type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
     }
@@ -362,6 +388,9 @@ export interface NexusGenArgTypes {
       outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
       typeOfPromptId?: string | null; // String
       writingStyle?: string | null; // String
+    }
+    updateDarkModePreferences: { // args
+      darkMode: boolean; // Boolean!
     }
   }
   Query: {
@@ -402,6 +431,9 @@ export interface NexusGenArgTypes {
   }
   Subscription: {
     contentSubscription: { // args
+      clerkUserId: string; // String!
+    }
+    darkModeSubscription: { // args
       clerkUserId: string; // String!
     }
   }
