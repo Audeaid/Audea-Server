@@ -1,3 +1,3 @@
-export const subscriptionStr = (userId: string) => {
-  return `contentUpdated_${userId}`;
+export const subscriptionStr = (clerkUserId: string) => {
+  return `contentUpdated_${clerkUserId}`;
 };

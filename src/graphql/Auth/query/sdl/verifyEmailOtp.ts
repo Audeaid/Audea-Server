@@ -7,6 +7,7 @@ export const verifyEmailOtp = extendType({
   definition(t) {
     t.nonNull.field('verifyEmailOtp', {
       type: 'AuthPayLoad',
+
       args: {
         email: nonNull(stringArg()),
         otp: nonNull(stringArg()), // String since OTP can start with the number 0

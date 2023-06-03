@@ -8,6 +8,7 @@ export const createNewUserSubscription = extendType({
   definition(t) {
     t.nonNull.field('createNewUserSubscription', {
       type: 'UserSubscription',
+
       args: {
         type: nonNull(
           arg({
@@ -16,12 +17,12 @@ export const createNewUserSubscription = extendType({
         ),
       },
 
-      async resolve(__, { type }, { prisma, userId }, ___) {
+      async resolve(__, { type }, { prisma, clerkUserId }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const startDate = new Date();
@@ -71,6 +72,7 @@ export const createNewUserSubscription = extendType({
                 endDate,
                 userId: user.id,
                 extended: false,
+                clerkUserId: user.clerkUserId,
               },
             });
           }
@@ -83,6 +85,7 @@ export const createNewUserSubscription = extendType({
             endDate: response.endDate,
             userId: response.userId,
             extended: response.extended,
+            clerkUserId: response.clerkUserId,
             user,
           };
         } catch (e) {

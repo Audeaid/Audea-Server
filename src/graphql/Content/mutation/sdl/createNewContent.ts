@@ -7,12 +7,12 @@ export const createNewContent = extendType({
     t.nonNull.field('createNewContent', {
       type: 'Content',
 
-      async resolve(__, ____, { prisma, userId, pubsub }, ___) {
+      async resolve(__, ____, { prisma, clerkUserId, pubsub }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const content = await prisma.content.create({
@@ -22,7 +22,7 @@ export const createNewContent = extendType({
             },
           });
 
-          await pubsub.publish(subscriptionStr(user.id), {
+          await pubsub.publish(subscriptionStr(user.clerkUserId), {
             mutationType: 'ADD',
             content: content,
           });

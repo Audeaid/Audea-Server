@@ -16,15 +16,15 @@ export const contentSubscription = extendType({
       description: 'Subscription for content',
 
       args: {
-        userId: nonNull(
+        clerkUserId: nonNull(
           arg({
             type: 'String',
           })
         ),
       },
 
-      subscribe: async (__, { userId }, { pubsub }, ___) => {
-        return pubsub.asyncIterator(subscriptionStr(userId));
+      subscribe: async (__, { clerkUserId }, { pubsub }, ___) => {
+        return pubsub.asyncIterator(subscriptionStr(clerkUserId));
       },
 
       resolve: async (payload: IPayloadContent, __, ____, ___) => {

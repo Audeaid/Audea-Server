@@ -1,24 +1,42 @@
-import { nonNull, stringArg, extendType } from 'nexus';
+import { extendType, nonNull, stringArg } from 'nexus';
 
-export const pushNewUserToNotion = extendType({
-  type: 'Query',
+export const createUserFromClerk = extendType({
+  type: 'Mutation',
   definition(t) {
-    t.nonNull.field('pushNewUserToNotion', {
-      type: 'ResponseMessage',
+    t.nonNull.field('createUserFromClerk', {
+      type: 'User',
+
       args: {
         email: nonNull(stringArg()),
+        clerkId: nonNull(stringArg()),
         firstName: nonNull(stringArg()),
         lastName: nonNull(stringArg()),
       },
 
       async resolve(
         __,
-        { email, firstName, lastName },
-        { notionInternal, prisma },
+        { email, clerkId, firstName, lastName },
+        { prisma, notionInternal },
         ___
       ) {
         try {
-          const response = await notionInternal.pages.create({
+          const searchUser = await prisma.user.findFirst({
+            where: { email },
+          });
+
+          if (searchUser) throw new Error('User already exist!');
+
+          const user = await prisma.user.create({
+            data: {
+              clerkUserId: clerkId,
+              firstName,
+              lastName,
+              email,
+              createdAt: new Date(),
+            },
+          });
+
+          const notion = await notionInternal.pages.create({
             parent: {
               database_id: process.env.NOTION_AUDEANS_DATABASE_ID as string,
             },
@@ -27,13 +45,13 @@ export const pushNewUserToNotion = extendType({
                 title: [
                   {
                     text: {
-                      content: `${firstName} ${lastName}`,
+                      content: `${user.firstName} ${user.lastName}`,
                     },
                   },
                 ],
               },
               Email: {
-                email: email,
+                email: user.email,
               },
               Subscription: {
                 select: {
@@ -44,7 +62,7 @@ export const pushNewUserToNotion = extendType({
                 rich_text: [
                   {
                     text: {
-                      content: firstName,
+                      content: user.firstName,
                     },
                   },
                 ],
@@ -53,7 +71,7 @@ export const pushNewUserToNotion = extendType({
                 rich_text: [
                   {
                     text: {
-                      content: lastName,
+                      content: user.lastName,
                     },
                   },
                 ],
@@ -62,13 +80,13 @@ export const pushNewUserToNotion = extendType({
           });
 
           await prisma.user.update({
-            where: { email },
-            data: { notionPageId: response.id },
+            where: { id: user.id },
+            data: { notionPageId: notion.id },
           });
 
-          return { response: JSON.stringify(response) };
-        } catch (error) {
-          throw error;
+          return user;
+        } catch (e) {
+          throw e;
         }
       },
     });

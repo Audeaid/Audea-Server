@@ -10,12 +10,12 @@ export const getOneContent = extendType({
         contentId: nonNull(stringArg()),
       },
 
-      async resolve(__, { contentId }, { userId, prisma }, ___) {
+      async resolve(__, { contentId }, { clerkUserId, prisma }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const content = await prisma.content.findFirstOrThrow({

@@ -41,7 +41,6 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   OutputLanguageEnum: "ARABIC" | "ASK" | "BAHASAINDONESIA" | "CHINESE" | "ENGLISH" | "FRENCH" | "HINDI" | "JAPANESE" | "RUSSIAN" | "SPANISH" | "TRANSCRIPT" | "URDU"
-  SignInProviderEnum: "APPLE" | "GOOGLE" | "MICROSOFT" | "PASSWORD"
   SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
   typeOfMutationType: "ADD" | "DELETE" | "EDIT"
 }
@@ -59,6 +58,9 @@ export interface NexusGenScalars {
 export interface NexusGenObjects {
   AuthPayLoad: { // root type
     token: string; // String!
+  }
+  ClerkPayLoad: { // root type
+    sessionId: string; // String!
   }
   Content: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -104,13 +106,15 @@ export interface NexusGenObjects {
     systemPrompt: string; // String!
   }
   User: { // root type
+    clerkUserId: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
+    firstName: string; // String!
     id: string; // String!
-    name: string; // String!
-    signInProvider: NexusGenEnums['SignInProviderEnum']; // SignInProviderEnum!
+    lastName: string; // String!
   }
   UserSubscription: { // root type
+    clerkUserId: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     endDate: NexusGenScalars['DateTime']; // DateTime!
     extended: boolean; // Boolean!
@@ -135,6 +139,9 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 export interface NexusGenFieldTypes {
   AuthPayLoad: { // field return type
     token: string; // String!
+  }
+  ClerkPayLoad: { // field return type
+    sessionId: string; // String!
   }
   Content: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -168,22 +175,20 @@ export interface NexusGenFieldTypes {
     id: string; // String!
   }
   Mutation: { // field return type
-    changePassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    createUserFromClerk: NexusGenRootTypes['User']; // User!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
-    editEmail: NexusGenRootTypes['User']; // User!
-    editUserInfo: NexusGenRootTypes['User']; // User!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
-    signUpWithPassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
   }
   Query: { // field return type
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
     getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
+    getClerkSessionId: NexusGenRootTypes['ClerkPayLoad']; // ClerkPayLoad!
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
@@ -191,10 +196,11 @@ export interface NexusGenFieldTypes {
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
     getUserInfo: NexusGenRootTypes['User']; // User!
     getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
-    loginWithPassword: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
     pushNewUserToNotion: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    searchUserByClerkId: NexusGenRootTypes['User'] | null; // User
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    test: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     verifyEmailOtp: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
   }
   ResponseMessage: { // field return type
@@ -210,13 +216,15 @@ export interface NexusGenFieldTypes {
     systemPrompt: string; // String!
   }
   User: { // field return type
+    clerkUserId: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
+    firstName: string; // String!
     id: string; // String!
-    name: string; // String!
-    signInProvider: NexusGenEnums['SignInProviderEnum']; // SignInProviderEnum!
+    lastName: string; // String!
   }
   UserSubscription: { // field return type
+    clerkUserId: string; // String!
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     endDate: NexusGenScalars['DateTime']; // DateTime!
     extended: boolean; // Boolean!
@@ -231,6 +239,9 @@ export interface NexusGenFieldTypes {
 export interface NexusGenFieldTypeNames {
   AuthPayLoad: { // field return type name
     token: 'String'
+  }
+  ClerkPayLoad: { // field return type name
+    sessionId: 'String'
   }
   Content: { // field return type name
     createdAt: 'DateTime'
@@ -264,22 +275,20 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
   }
   Mutation: { // field return type name
-    changePassword: 'AuthPayLoad'
     createNewContent: 'Content'
     createNewContentSettings: 'ContentSettings'
     createNewUserSubscription: 'UserSubscription'
+    createUserFromClerk: 'User'
     deleteAccount: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
-    editEmail: 'User'
-    editUserInfo: 'User'
     extendTrialSubscription: 'UserSubscription'
-    signUpWithPassword: 'AuthPayLoad'
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
   }
   Query: { // field return type name
     getAllContent: 'Content'
     getAllTypeOfPrompt: 'TypeOfPrompt'
+    getClerkSessionId: 'ClerkPayLoad'
     getContentSettings: 'ContentSettings'
     getDeletedUser: 'DeletedUser'
     getEmailOtp: 'ResponseMessage'
@@ -287,10 +296,11 @@ export interface NexusGenFieldTypeNames {
     getTypeOfPromptFromId: 'TypeOfPrompt'
     getUserInfo: 'User'
     getUserSubscription: 'UserSubscription'
-    loginWithPassword: 'AuthPayLoad'
     pushNewUserToNotion: 'ResponseMessage'
+    searchUserByClerkId: 'User'
     searchUserByEmail: 'User'
     sendNewUserEmail: 'ResponseMessage'
+    test: 'ResponseMessage'
     verifyEmailOtp: 'AuthPayLoad'
   }
   ResponseMessage: { // field return type name
@@ -306,13 +316,15 @@ export interface NexusGenFieldTypeNames {
     systemPrompt: 'String'
   }
   User: { // field return type name
+    clerkUserId: 'String'
     createdAt: 'DateTime'
     email: 'String'
+    firstName: 'String'
     id: 'String'
-    name: 'String'
-    signInProvider: 'SignInProviderEnum'
+    lastName: 'String'
   }
   UserSubscription: { // field return type name
+    clerkUserId: 'String'
     createdAt: 'DateTime'
     endDate: 'DateTime'
     extended: 'Boolean'
@@ -326,29 +338,17 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
-    changePassword: { // args
-      email: string; // String!
-      jwtToken: string; // String!
-      password: string; // String!
-    }
     createNewUserSubscription: { // args
       type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
     }
+    createUserFromClerk: { // args
+      clerkId: string; // String!
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+    }
     deleteContent: { // args
       contentId: string; // String!
-    }
-    editEmail: { // args
-      email: string; // String!
-      jwtToken: string; // String!
-    }
-    editUserInfo: { // args
-      name?: string | null; // String
-    }
-    signUpWithPassword: { // args
-      email: string; // String!
-      jwtToken: string; // String!
-      name: string; // String!
-      password: string; // String!
     }
     updateContent: { // args
       contentId: string; // String!
@@ -367,6 +367,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getClerkSessionId: { // args
+      jwtToken: string; // String!
+    }
     getDeletedUser: { // args
       email: string; // String!
     }
@@ -379,13 +382,13 @@ export interface NexusGenArgTypes {
     getTypeOfPromptFromId: { // args
       typeOfPromptId: string; // String!
     }
-    loginWithPassword: { // args
-      email: string; // String!
-      password: string; // String!
-    }
     pushNewUserToNotion: { // args
       email: string; // String!
-      name: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
+    }
+    searchUserByClerkId: { // args
+      clerkUserId: string; // String!
     }
     searchUserByEmail: { // args
       email: string; // String!
@@ -401,7 +404,7 @@ export interface NexusGenArgTypes {
   }
   Subscription: {
     contentSubscription: { // args
-      userId: string; // String!
+      clerkUserId: string; // String!
     }
   }
 }

@@ -6,6 +6,7 @@ export const sendNewUserEmail = extendType({
   definition(t) {
     t.nonNull.field('sendNewUserEmail', {
       type: 'ResponseMessage',
+
       args: {
         email: nonNull(stringArg()),
         name: nonNull(stringArg()),

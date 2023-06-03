@@ -7,6 +7,11 @@ type AuthPayLoad {
   token: String!
 }
 
+type ClerkPayLoad {
+  """sessionId from clerk"""
+  sessionId: String!
+}
+
 type Content {
   createdAt: DateTime!
   gptGenerated: String
@@ -53,16 +58,13 @@ type DeletedUser {
 scalar File
 
 type Mutation {
-  changePassword(email: String!, jwtToken: String!, password: String!): AuthPayLoad!
   createNewContent: Content!
   createNewContentSettings: ContentSettings!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
+  createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!): User!
   deleteAccount: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
-  editEmail(email: String!, jwtToken: String!): User!
-  editUserInfo(name: String): User!
   extendTrialSubscription: UserSubscription!
-  signUpWithPassword(email: String!, jwtToken: String!, name: String!, password: String!): AuthPayLoad!
   updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
 }
@@ -85,6 +87,7 @@ enum OutputLanguageEnum {
 type Query {
   getAllContent: [Content!]
   getAllTypeOfPrompt: [TypeOfPrompt!]!
+  getClerkSessionId(jwtToken: String!): ClerkPayLoad!
   getContentSettings: ContentSettings
   getDeletedUser(email: String!): DeletedUser
   getEmailOtp(email: String!): ResponseMessage!
@@ -92,10 +95,11 @@ type Query {
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
   getUserInfo: User!
   getUserSubscription: UserSubscription!
-  loginWithPassword(email: String!, password: String!): AuthPayLoad!
-  pushNewUserToNotion(email: String!, name: String!): ResponseMessage!
+  pushNewUserToNotion(email: String!, firstName: String!, lastName: String!): ResponseMessage!
+  searchUserByClerkId(clerkUserId: String!): User
   searchUserByEmail(email: String!): User
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
+  test: ResponseMessage!
   verifyEmailOtp(email: String!, otp: String!): AuthPayLoad!
 }
 
@@ -104,16 +108,9 @@ type ResponseMessage {
   response: String
 }
 
-enum SignInProviderEnum {
-  APPLE
-  GOOGLE
-  MICROSOFT
-  PASSWORD
-}
-
 type Subscription {
   """Subscription for content"""
-  contentSubscription(userId: String!): ContentSubscriptionType
+  contentSubscription(clerkUserId: String!): ContentSubscriptionType
 }
 
 enum SubscriptionTypeEnum {
@@ -132,14 +129,16 @@ type TypeOfPrompt {
 }
 
 type User {
+  clerkUserId: String!
   createdAt: DateTime!
   email: String!
+  firstName: String!
   id: String!
-  name: String!
-  signInProvider: SignInProviderEnum!
+  lastName: String!
 }
 
 type UserSubscription {
+  clerkUserId: String!
   createdAt: DateTime!
   endDate: DateTime!
   extended: Boolean!

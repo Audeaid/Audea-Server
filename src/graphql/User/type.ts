@@ -4,18 +4,12 @@ export const User = objectType({
   name: 'User',
   definition(t) {
     t.nonNull.string('id');
-    t.nonNull.string('name');
+    t.nonNull.string('firstName');
+    t.nonNull.string('lastName');
     t.nonNull.string('email');
     t.nonNull.dateTime('createdAt');
-    t.nonNull.field('signInProvider', {
-      type: 'SignInProviderEnum',
-    });
+    t.nonNull.string('clerkUserId');
   },
-});
-
-export const SignInProviderEnum = enumType({
-  name: 'SignInProviderEnum',
-  members: ['GOOGLE', 'MICROSOFT', 'APPLE', 'PASSWORD'],
 });
 
 export const DeletedUser = objectType({

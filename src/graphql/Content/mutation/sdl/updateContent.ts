@@ -30,11 +30,11 @@ export const updateContent = extendType({
           writingStyle,
           outputLanguage,
         },
-        { prisma, userId, pubsub },
+        { prisma, clerkUserId, pubsub },
         ___
       ) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           if (
             !title &&
@@ -48,7 +48,7 @@ export const updateContent = extendType({
             throw new Error('Cannot have all value null!');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const content = await prisma.content.findFirstOrThrow({
@@ -68,7 +68,7 @@ export const updateContent = extendType({
             },
           });
 
-          await pubsub.publish(subscriptionStr(user.id), {
+          await pubsub.publish(subscriptionStr(user.clerkUserId), {
             mutationType: 'EDIT',
             content: response,
           });

@@ -9,13 +9,12 @@ datasource db {
 
 model User {
     id                  String          @id @default(auto()) @map("_id") @db.ObjectId
-    name                String          
+    clerkUserId         String          @unique
+    firstName           String         
+    lastName            String
     email               String          @unique
-    password            String?
-    accessToken         String?
     createdAt           DateTime
     notionPageId        String?
-    signInProvider      SignInProvider
     subscription        Subscription?
     content             Content[]
     contentSettings     ContentSettings?
@@ -27,13 +26,6 @@ model DeletedAccount {
     email               String          @unique
 }
 
-enum SignInProvider {
-    GOOGLE
-    MICROSOFT
-    APPLE
-    PASSWORD
-}
-
 model Subscription {
     id                  String              @id @default(auto()) @map("_id") @db.ObjectId
     type                SubscriptionType
@@ -43,6 +35,7 @@ model Subscription {
     user                User?               @relation(fields: [userId], references: [id])
     userId              String              @unique @db.ObjectId
     extended            Boolean
+    clerkUserId         String              @unique
 }
 
 enum SubscriptionType {

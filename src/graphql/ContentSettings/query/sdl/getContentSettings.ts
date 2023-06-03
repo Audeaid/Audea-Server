@@ -6,12 +6,12 @@ export const getContentSettings = extendType({
     t.field('getContentSettings', {
       type: 'ContentSettings',
 
-      async resolve(__, ____, { prisma, userId }, ___) {
+      async resolve(__, ____, { prisma, clerkUserId }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const userSettings = await prisma.contentSettings.findFirst({

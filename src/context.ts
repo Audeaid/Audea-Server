@@ -1,12 +1,14 @@
 import { PrismaClient } from '@prisma/client';
-import { decodeAuthHeader } from './utils/auth';
-import { Request, Response } from 'express';
+import { decodeAuthHeaderWithClerk } from './utils/auth';
 import twilio from 'twilio';
 import { PubSub } from 'graphql-subscriptions';
 import { Client } from '@notionhq/client';
 import { Resend } from 'resend';
 import AWS from 'aws-sdk';
 import { Configuration, OpenAIApi } from 'openai';
+import clerk from '@clerk/clerk-sdk-node';
+import { ContextFunction } from '@apollo/server';
+import { ExpressContextFunctionArgument } from '@apollo/server/dist/esm/express4';
 
 const pubsub = new PubSub();
 
@@ -36,35 +38,34 @@ const openai = new OpenAIApi(
 
 export interface Context {
   prisma: PrismaClient;
-  userId: string | null;
   twilioClient: twilio.Twilio;
   pubsub: PubSub;
   notionInternal: Client;
   resend: Resend;
   s3: AWS.S3;
   openai: OpenAIApi;
+  clerk: typeof clerk;
+  clerkUserId: string | null;
 }
 
-export const context = ({
-  req,
-  res,
-}: {
-  req: Request;
-  res: Response;
-}): Context => {
-  const token =
+export const context: ContextFunction<
+  [ExpressContextFunctionArgument],
+  Context
+> = async ({ req }) => {
+  const clerkUserId =
     req && req.headers.authorization
-      ? decodeAuthHeader(req.headers.authorization)
+      ? decodeAuthHeaderWithClerk(req.headers.authorization)
       : null;
 
   return {
     prisma,
-    userId: token ? token.userId : null,
+    clerkUserId,
     twilioClient,
     pubsub,
     notionInternal,
     resend,
     s3,
     openai,
+    clerk,
   };
 };

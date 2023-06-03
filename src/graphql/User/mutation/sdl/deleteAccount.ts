@@ -6,12 +6,17 @@ export const deleteAccount = extendType({
     t.nonNull.field('deleteAccount', {
       type: 'ResponseMessage',
 
-      async resolve(__, ____, { prisma, notionInternal, userId, s3 }, ___) {
+      async resolve(
+        __,
+        ____,
+        { prisma, notionInternal, clerkUserId, s3 },
+        ___
+      ) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const content = await prisma.content.findMany({

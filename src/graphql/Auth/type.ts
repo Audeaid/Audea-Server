@@ -8,3 +8,12 @@ export const AuthPayLoad = objectType({
     });
   },
 });
+
+export const ClerkPayLoad = objectType({
+  name: 'ClerkPayLoad',
+  definition(t) {
+    t.nonNull.string('sessionId', {
+      description: 'sessionId from clerk',
+    });
+  },
+});

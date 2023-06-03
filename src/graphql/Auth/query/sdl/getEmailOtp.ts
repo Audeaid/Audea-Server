@@ -5,6 +5,7 @@ export const getEmailOtp = extendType({
   definition(t) {
     t.nonNull.field('getEmailOtp', {
       type: 'ResponseMessage',
+
       args: {
         email: nonNull(stringArg()),
       },

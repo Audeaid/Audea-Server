@@ -6,12 +6,12 @@ export const getAllContent = extendType({
     t.list.nonNull.field('getAllContent', {
       type: 'Content',
 
-      async resolve(__, ____, { userId, prisma }, ___) {
+      async resolve(__, ____, { clerkUserId, prisma }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           const user = await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const content = await prisma.content.findMany({

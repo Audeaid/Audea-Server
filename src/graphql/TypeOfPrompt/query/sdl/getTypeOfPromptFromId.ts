@@ -5,16 +5,17 @@ export const getTypeOfPromptFromId = extendType({
   definition(t) {
     t.field('getTypeOfPromptFromId', {
       type: 'TypeOfPrompt',
+
       args: {
         typeOfPromptId: nonNull(stringArg()),
       },
 
-      async resolve(__, { typeOfPromptId }, { prisma, userId }, ___) {
+      async resolve(__, { typeOfPromptId }, { prisma, clerkUserId }, ___) {
         try {
-          if (!userId) throw new Error('Invalid token.');
+          if (!clerkUserId) throw new Error('Invalid token.');
 
           await prisma.user.findFirstOrThrow({
-            where: { id: userId },
+            where: { clerkUserId },
           });
 
           const typeOfPrompt = await prisma.typeOfPrompt.findFirst({
