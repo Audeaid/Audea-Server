@@ -200,7 +200,6 @@ export interface NexusGenFieldTypes {
     searchUserByClerkId: NexusGenRootTypes['User'] | null; // User
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
-    test: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     verifyEmailOtp: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
   }
   ResponseMessage: { // field return type
@@ -300,7 +299,6 @@ export interface NexusGenFieldTypeNames {
     searchUserByClerkId: 'User'
     searchUserByEmail: 'User'
     sendNewUserEmail: 'ResponseMessage'
-    test: 'ResponseMessage'
     verifyEmailOtp: 'AuthPayLoad'
   }
   ResponseMessage: { // field return type name

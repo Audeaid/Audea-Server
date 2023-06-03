@@ -99,7 +99,6 @@ type Query {
   searchUserByClerkId(clerkUserId: String!): User
   searchUserByEmail(email: String!): User
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
-  test: ResponseMessage!
   verifyEmailOtp(email: String!, otp: String!): AuthPayLoad!
 }
 

@@ -346,30 +346,30 @@ import { clerkGetVerified } from '../../../../utils/auth';
 //   },
 // });
 
-export const test = extendType({
-  type: 'Query',
-  definition(t) {
-    t.nonNull.field('test', {
-      type: 'ResponseMessage',
+// export const test = extendType({
+//   type: 'Query',
+//   definition(t) {
+//     t.nonNull.field('test', {
+//       type: 'ResponseMessage',
 
-      async resolve(__, ____, { sessionId, clerk }, ___) {
-        // const sessionList = await clerk.sessions.getSessionList();
-        // console.log(sessionList);
+//       async resolve(__, ____, { sessionId, clerk }, ___) {
+//         // const sessionList = await clerk.sessions.getSessionList();
+//         // console.log(sessionList);
 
-        if (!sessionId) throw new Error('Missing auth');
+//         if (!sessionId) throw new Error('Missing auth');
 
-        const isVerified = await clerkGetVerified(sessionId, clerk);
+//         const isVerified = await clerkGetVerified(sessionId, clerk);
 
-        const session = await clerk.sessions.getSession(sessionId);
+//         const session = await clerk.sessions.getSession(sessionId);
 
-        console.log(session);
-        try {
-          return { response: isVerified.toString() };
-          // return { response: 'titit' };
-        } catch (error) {
-          throw error;
-        }
-      },
-    });
-  },
-});
+//         console.log(session);
+//         try {
+//           return { response: isVerified.toString() };
+//           // return { response: 'titit' };
+//         } catch (error) {
+//           throw error;
+//         }
+//       },
+//     });
+//   },
+// });
