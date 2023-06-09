@@ -210,8 +210,10 @@ export interface NexusGenFieldTypes {
     getUserInfo: NexusGenRootTypes['User']; // User!
     getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     pushNewUserToNotion: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    pushSupportTicket: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     searchUserByClerkId: NexusGenRootTypes['User'] | null; // User
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
+    sendInvitationEmailFromUser: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     verifyEmailOtp: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
   }
@@ -318,8 +320,10 @@ export interface NexusGenFieldTypeNames {
     getUserInfo: 'User'
     getUserSubscription: 'UserSubscription'
     pushNewUserToNotion: 'ResponseMessage'
+    pushSupportTicket: 'ResponseMessage'
     searchUserByClerkId: 'User'
     searchUserByEmail: 'User'
+    sendInvitationEmailFromUser: 'ResponseMessage'
     sendNewUserEmail: 'ResponseMessage'
     verifyEmailOtp: 'AuthPayLoad'
   }
@@ -414,11 +418,22 @@ export interface NexusGenArgTypes {
       firstName: string; // String!
       lastName: string; // String!
     }
+    pushSupportTicket: { // args
+      area: string; // String!
+      description: string; // String!
+      severityLevel: string; // String!
+      subject: string; // String!
+    }
     searchUserByClerkId: { // args
       clerkUserId: string; // String!
     }
     searchUserByEmail: { // args
       email: string; // String!
+    }
+    sendInvitationEmailFromUser: { // args
+      email: string; // String!
+      firstName: string; // String!
+      lastName: string; // String!
     }
     sendNewUserEmail: { // args
       email: string; // String!

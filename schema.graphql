@@ -105,8 +105,10 @@ type Query {
   getUserInfo: User!
   getUserSubscription: UserSubscription!
   pushNewUserToNotion(email: String!, firstName: String!, lastName: String!): ResponseMessage!
+  pushSupportTicket(area: String!, description: String!, severityLevel: String!, subject: String!): ResponseMessage!
   searchUserByClerkId(clerkUserId: String!): User
   searchUserByEmail(email: String!): User
+  sendInvitationEmailFromUser(email: String!, firstName: String!, lastName: String!): ResponseMessage!
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
   verifyEmailOtp(email: String!, otp: String!): AuthPayLoad!
 }

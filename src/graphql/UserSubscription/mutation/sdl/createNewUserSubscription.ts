@@ -30,23 +30,23 @@ export const createNewUserSubscription = extendType({
 
           if (type === 'TRIAL')
             endDate = new Date(
-              moment(startDate).add('7', 'days').toLocaleString()
+              moment(startDate).add('7', 'days').toISOString()
             );
           else if (type === 'MONTHLY')
             endDate = new Date(
-              moment(startDate).add('1', 'month').toLocaleString()
+              moment(startDate).add('1', 'month').toISOString()
             );
           else if (type === 'YEARLY')
             endDate = new Date(
-              moment(startDate).add('1', 'year').toLocaleString()
+              moment(startDate).add('1', 'year').toISOString()
             );
           else if (type === 'LIFETIME')
             endDate = new Date(
-              moment(startDate).add('999', 'year').toLocaleString()
+              moment(startDate).add('999', 'year').toISOString()
             );
           else if (type === 'EARLYADOPTER')
             endDate = new Date(
-              moment(startDate).add('2', 'months').toLocaleString()
+              moment(startDate).add('60', 'days').toISOString()
             );
           else endDate = null;
 
