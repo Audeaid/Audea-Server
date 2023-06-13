@@ -2,16 +2,6 @@
 ### Do not make changes to this file directly
 
 
-type AuthPayLoad {
-  """JWT Token"""
-  token: String!
-}
-
-type ClerkPayLoad {
-  """sessionId from clerk"""
-  sessionId: String!
-}
-
 type Content {
   createdAt: DateTime!
   gptGenerated: String
@@ -122,7 +112,6 @@ type Query {
   checkIfAlreadyVotedPlatform(platform: PlatformVoteEnum!): PlatformVoteUser!
   getAllContent: [Content!]
   getAllTypeOfPrompt: [TypeOfPrompt!]!
-  getClerkSessionId(jwtToken: String!): ClerkPayLoad!
   getContentSettings: ContentSettings
   getDarkModePreferences: DarkMode
   getDeletedUser(email: String!): DeletedUser

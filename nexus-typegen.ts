@@ -57,12 +57,6 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
-  AuthPayLoad: { // root type
-    token: string; // String!
-  }
-  ClerkPayLoad: { // root type
-    sessionId: string; // String!
-  }
   Content: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     gptGenerated?: string | null; // String
@@ -155,12 +149,6 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnums
 
 export interface NexusGenFieldTypes {
-  AuthPayLoad: { // field return type
-    token: string; // String!
-  }
-  ClerkPayLoad: { // field return type
-    sessionId: string; // String!
-  }
   Content: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     gptGenerated: string | null; // String
@@ -227,7 +215,6 @@ export interface NexusGenFieldTypes {
     checkIfAlreadyVotedPlatform: NexusGenRootTypes['PlatformVoteUser']; // PlatformVoteUser!
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
     getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
-    getClerkSessionId: NexusGenRootTypes['ClerkPayLoad']; // ClerkPayLoad!
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
@@ -285,12 +272,6 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
-  AuthPayLoad: { // field return type name
-    token: 'String'
-  }
-  ClerkPayLoad: { // field return type name
-    sessionId: 'String'
-  }
   Content: { // field return type name
     createdAt: 'DateTime'
     gptGenerated: 'String'
@@ -357,7 +338,6 @@ export interface NexusGenFieldTypeNames {
     checkIfAlreadyVotedPlatform: 'PlatformVoteUser'
     getAllContent: 'Content'
     getAllTypeOfPrompt: 'TypeOfPrompt'
-    getClerkSessionId: 'ClerkPayLoad'
     getContentSettings: 'ContentSettings'
     getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
@@ -457,9 +437,6 @@ export interface NexusGenArgTypes {
   Query: {
     checkIfAlreadyVotedPlatform: { // args
       platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
-    }
-    getClerkSessionId: { // args
-      jwtToken: string; // String!
     }
     getDeletedUser: { // args
       email: string; // String!
