@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { decodeAuthHeaderWithClerk } from './utils/auth';
+import { decodeAuthHeader } from './utils/auth';
 import twilio from 'twilio';
 import { PubSub } from 'graphql-subscriptions';
 import { Client } from '@notionhq/client';
@@ -52,14 +52,14 @@ export const context: ContextFunction<
   [ExpressContextFunctionArgument],
   Context
 > = async ({ req }) => {
-  const clerkUserId =
+  const header =
     req && req.headers.authorization
-      ? decodeAuthHeaderWithClerk(req.headers.authorization)
+      ? decodeAuthHeader(req.headers.authorization)
       : null;
 
   return {
     prisma,
-    clerkUserId,
+    clerkUserId: header ? header.clerkUserId : null,
     twilioClient,
     pubsub,
     notionInternal,

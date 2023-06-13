@@ -41,6 +41,7 @@ export interface NexusGenInputs {
 
 export interface NexusGenEnums {
   OutputLanguageEnum: "ARABIC" | "ASK" | "BAHASAINDONESIA" | "CHINESE" | "ENGLISH" | "FRENCH" | "HINDI" | "JAPANESE" | "RUSSIAN" | "SPANISH" | "TRANSCRIPT" | "URDU"
+  PlatformVoteEnum: "ANDROID" | "ANDROIDTABLET" | "IOS" | "IPADOS" | "LINUX" | "MACOS" | "WINDOWS"
   SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
   typeOfMutationType: "ADD" | "DELETE" | "EDIT"
 }
@@ -99,6 +100,18 @@ export interface NexusGenObjects {
     id: string; // String!
   }
   Mutation: {};
+  PlatformVote: { // root type
+    count: number; // Int!
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+  }
+  PlatformVoteSubscription: { // root type
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+    vote: boolean; // Boolean!
+  }
+  PlatformVoteUser: { // root type
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+    voted: boolean; // Boolean!
+  }
   Query: {};
   ResponseMessage: { // root type
     response?: string | null; // String
@@ -196,16 +209,30 @@ export interface NexusGenFieldTypes {
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     updateDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
+    votePlatform: NexusGenRootTypes['PlatformVote']; // PlatformVote!
+  }
+  PlatformVote: { // field return type
+    count: number; // Int!
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+  }
+  PlatformVoteSubscription: { // field return type
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+    vote: boolean; // Boolean!
+  }
+  PlatformVoteUser: { // field return type
+    platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+    voted: boolean; // Boolean!
   }
   Query: { // field return type
+    checkIfAlreadyVotedPlatform: NexusGenRootTypes['PlatformVoteUser']; // PlatformVoteUser!
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
     getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
     getClerkSessionId: NexusGenRootTypes['ClerkPayLoad']; // ClerkPayLoad!
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
-    getEmailOtp: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
+    getPlatformVote: NexusGenRootTypes['PlatformVote']; // PlatformVote!
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
     getUserInfo: NexusGenRootTypes['User']; // User!
     getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
@@ -215,14 +242,20 @@ export interface NexusGenFieldTypes {
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
     sendInvitationEmailFromUser: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
-    verifyEmailOtp: NexusGenRootTypes['AuthPayLoad']; // AuthPayLoad!
   }
   ResponseMessage: { // field return type
     response: string | null; // String
   }
   Subscription: { // field return type
+    androidTabletVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
+    androidVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
     contentSubscription: NexusGenRootTypes['ContentSubscriptionType'] | null; // ContentSubscriptionType
     darkModeSubscription: NexusGenRootTypes['DarkMode'] | null; // DarkMode
+    iOSVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
+    iPadOSVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
+    linuxVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
+    macOSVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
+    windowsVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
   }
   TypeOfPrompt: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -306,16 +339,30 @@ export interface NexusGenFieldTypeNames {
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
     updateDarkModePreferences: 'DarkMode'
+    votePlatform: 'PlatformVote'
+  }
+  PlatformVote: { // field return type name
+    count: 'Int'
+    platform: 'PlatformVoteEnum'
+  }
+  PlatformVoteSubscription: { // field return type name
+    platform: 'PlatformVoteEnum'
+    vote: 'Boolean'
+  }
+  PlatformVoteUser: { // field return type name
+    platform: 'PlatformVoteEnum'
+    voted: 'Boolean'
   }
   Query: { // field return type name
+    checkIfAlreadyVotedPlatform: 'PlatformVoteUser'
     getAllContent: 'Content'
     getAllTypeOfPrompt: 'TypeOfPrompt'
     getClerkSessionId: 'ClerkPayLoad'
     getContentSettings: 'ContentSettings'
     getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
-    getEmailOtp: 'ResponseMessage'
     getOneContent: 'Content'
+    getPlatformVote: 'PlatformVote'
     getTypeOfPromptFromId: 'TypeOfPrompt'
     getUserInfo: 'User'
     getUserSubscription: 'UserSubscription'
@@ -325,14 +372,20 @@ export interface NexusGenFieldTypeNames {
     searchUserByEmail: 'User'
     sendInvitationEmailFromUser: 'ResponseMessage'
     sendNewUserEmail: 'ResponseMessage'
-    verifyEmailOtp: 'AuthPayLoad'
   }
   ResponseMessage: { // field return type name
     response: 'String'
   }
   Subscription: { // field return type name
+    androidTabletVoteSubscription: 'PlatformVoteSubscription'
+    androidVoteSubscription: 'PlatformVoteSubscription'
     contentSubscription: 'ContentSubscriptionType'
     darkModeSubscription: 'DarkMode'
+    iOSVoteSubscription: 'PlatformVoteSubscription'
+    iPadOSVoteSubscription: 'PlatformVoteSubscription'
+    linuxVoteSubscription: 'PlatformVoteSubscription'
+    macOSVoteSubscription: 'PlatformVoteSubscription'
+    windowsVoteSubscription: 'PlatformVoteSubscription'
   }
   TypeOfPrompt: { // field return type name
     createdAt: 'DateTime'
@@ -396,19 +449,26 @@ export interface NexusGenArgTypes {
     updateDarkModePreferences: { // args
       darkMode: boolean; // Boolean!
     }
+    votePlatform: { // args
+      platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+      vote: boolean; // Boolean!
+    }
   }
   Query: {
+    checkIfAlreadyVotedPlatform: { // args
+      platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
+    }
     getClerkSessionId: { // args
       jwtToken: string; // String!
     }
     getDeletedUser: { // args
       email: string; // String!
     }
-    getEmailOtp: { // args
-      email: string; // String!
-    }
     getOneContent: { // args
       contentId: string; // String!
+    }
+    getPlatformVote: { // args
+      platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
     }
     getTypeOfPromptFromId: { // args
       typeOfPromptId: string; // String!
@@ -438,10 +498,6 @@ export interface NexusGenArgTypes {
     sendNewUserEmail: { // args
       email: string; // String!
       name: string; // String!
-    }
-    verifyEmailOtp: { // args
-      email: string; // String!
-      otp: string; // String!
     }
   }
   Subscription: {

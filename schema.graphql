@@ -75,6 +75,7 @@ type Mutation {
   updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
   updateDarkModePreferences(darkMode: Boolean!): DarkMode!
+  votePlatform(platform: PlatformVoteEnum!, vote: Boolean!): PlatformVote!
 }
 
 enum OutputLanguageEnum {
@@ -92,15 +93,41 @@ enum OutputLanguageEnum {
   URDU
 }
 
+type PlatformVote {
+  count: Int!
+  platform: PlatformVoteEnum!
+}
+
+enum PlatformVoteEnum {
+  ANDROID
+  ANDROIDTABLET
+  IOS
+  IPADOS
+  LINUX
+  MACOS
+  WINDOWS
+}
+
+type PlatformVoteSubscription {
+  platform: PlatformVoteEnum!
+  vote: Boolean!
+}
+
+type PlatformVoteUser {
+  platform: PlatformVoteEnum!
+  voted: Boolean!
+}
+
 type Query {
+  checkIfAlreadyVotedPlatform(platform: PlatformVoteEnum!): PlatformVoteUser!
   getAllContent: [Content!]
   getAllTypeOfPrompt: [TypeOfPrompt!]!
   getClerkSessionId(jwtToken: String!): ClerkPayLoad!
   getContentSettings: ContentSettings
   getDarkModePreferences: DarkMode
   getDeletedUser(email: String!): DeletedUser
-  getEmailOtp(email: String!): ResponseMessage!
   getOneContent(contentId: String!): Content!
+  getPlatformVote(platform: PlatformVoteEnum!): PlatformVote!
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
   getUserInfo: User!
   getUserSubscription: UserSubscription!
@@ -110,7 +137,6 @@ type Query {
   searchUserByEmail(email: String!): User
   sendInvitationEmailFromUser(email: String!, firstName: String!, lastName: String!): ResponseMessage!
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
-  verifyEmailOtp(email: String!, otp: String!): AuthPayLoad!
 }
 
 type ResponseMessage {
@@ -119,11 +145,19 @@ type ResponseMessage {
 }
 
 type Subscription {
+  androidTabletVoteSubscription: PlatformVoteSubscription
+  androidVoteSubscription: PlatformVoteSubscription
+
   """Subscription for content"""
   contentSubscription(clerkUserId: String!): ContentSubscriptionType
 
   """Subscription for darkMode"""
   darkModeSubscription(clerkUserId: String!): DarkMode
+  iOSVoteSubscription: PlatformVoteSubscription
+  iPadOSVoteSubscription: PlatformVoteSubscription
+  linuxVoteSubscription: PlatformVoteSubscription
+  macOSVoteSubscription: PlatformVoteSubscription
+  windowsVoteSubscription: PlatformVoteSubscription
 }
 
 enum SubscriptionTypeEnum {

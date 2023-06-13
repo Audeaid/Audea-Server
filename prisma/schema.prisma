@@ -20,6 +20,13 @@ model User {
     contentSettings         ContentSettings?
     notionAccount           NotionAccount?
     darkModePreferences     DarkModePreferences?
+    iOSVote                 IOSVote?
+    androidVote             AndroidVote?
+    androidTableVote        AndroidTabletVote?
+    macOSVote               MacOSVote?
+    windowsVote             WindowsVote?
+    linuxVote               LinuxVote?
+    iPadOSVote              IPadOSVote?
 }
 
 model DeletedAccount {
@@ -50,6 +57,55 @@ enum SubscriptionType {
 model DarkModePreferences {
     id                  String              @id @default(auto()) @map("_id") @db.ObjectId
     darkMode            Boolean
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model IOSVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model AndroidVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model AndroidTabletVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model MacOSVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model WindowsVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model LinuxVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model IPadOSVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
     user                User?               @relation(fields: [userId], references: [id])
     userId              String              @unique @db.ObjectId
     clerkUserId         String              @unique
