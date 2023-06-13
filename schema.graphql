@@ -120,6 +120,7 @@ type Query {
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
   getUserInfo: User!
   getUserSubscription: UserSubscription!
+  getUserSubscriptionEDGE(clerkUserId: String!, secret: String!): UserSubscription!
   pushNewUserToNotion(email: String!, firstName: String!, lastName: String!): ResponseMessage!
   pushSupportTicket(area: String!, description: String!, severityLevel: String!, subject: String!): ResponseMessage!
   searchUserByClerkId(clerkUserId: String!): User

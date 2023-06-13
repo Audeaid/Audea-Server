@@ -223,6 +223,7 @@ export interface NexusGenFieldTypes {
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
     getUserInfo: NexusGenRootTypes['User']; // User!
     getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    getUserSubscriptionEDGE: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     pushNewUserToNotion: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     pushSupportTicket: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     searchUserByClerkId: NexusGenRootTypes['User'] | null; // User
@@ -346,6 +347,7 @@ export interface NexusGenFieldTypeNames {
     getTypeOfPromptFromId: 'TypeOfPrompt'
     getUserInfo: 'User'
     getUserSubscription: 'UserSubscription'
+    getUserSubscriptionEDGE: 'UserSubscription'
     pushNewUserToNotion: 'ResponseMessage'
     pushSupportTicket: 'ResponseMessage'
     searchUserByClerkId: 'User'
@@ -449,6 +451,10 @@ export interface NexusGenArgTypes {
     }
     getTypeOfPromptFromId: { // args
       typeOfPromptId: string; // String!
+    }
+    getUserSubscriptionEDGE: { // args
+      clerkUserId: string; // String!
+      secret: string; // String!
     }
     pushNewUserToNotion: { // args
       email: string; // String!
