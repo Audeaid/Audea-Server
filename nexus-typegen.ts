@@ -409,6 +409,7 @@ export interface NexusGenArgTypes {
       email: string; // String!
       firstName: string; // String!
       lastName: string; // String!
+      referralJwt?: string | null; // String
     }
     deleteContent: { // args
       contentId: string; // String!

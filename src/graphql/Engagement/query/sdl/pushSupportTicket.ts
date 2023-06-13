@@ -55,13 +55,7 @@ export const pushSupportTicket = extendType({
                 },
               },
 
-              Audeance: {
-                relation: [
-                  {
-                    id: user.notionPageId,
-                  },
-                ],
-              },
+              Audeance: { relation: [{ id: user.notionPageId }] },
             },
             children: transformStringToBlocks(description),
           });

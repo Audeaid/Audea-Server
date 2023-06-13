@@ -15,6 +15,7 @@ model User {
     email                   String                      @unique
     createdAt               DateTime
     notionPageId            String?
+    invitedByUserId         String?                     @db.ObjectId
     subscription            Subscription?
     content                 Content[]
     contentSettings         ContentSettings?

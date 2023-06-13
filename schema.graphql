@@ -58,7 +58,7 @@ type Mutation {
   createNewContentSettings: ContentSettings!
   createNewDarkModePreferences(darkMode: Boolean): DarkMode!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
-  createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!): User!
+  createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!, referralJwt: String): User!
   deleteAccount: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
   extendTrialSubscription: UserSubscription!

@@ -46,6 +46,7 @@ export interface Context {
   openai: OpenAIApi;
   clerk: typeof clerk;
   clerkUserId: string | null;
+  jwtToken: string | null;
 }
 
 export const context: ContextFunction<
@@ -57,9 +58,15 @@ export const context: ContextFunction<
       ? decodeAuthHeader(req.headers.authorization)
       : null;
 
+  const jwtToken =
+    req && req.headers.authorization
+      ? req.headers.authorization.replace('Bearer ', '')
+      : null;
+
   return {
     prisma,
     clerkUserId: header ? header.clerkUserId : null,
+    jwtToken,
     twilioClient,
     pubsub,
     notionInternal,

@@ -16,7 +16,7 @@ export const sendInvitationEmailFromUser = extendType({
       async resolve(
         __,
         { email, firstName, lastName },
-        { resend, clerkUserId, prisma },
+        { resend, clerkUserId, prisma, jwtToken },
         ___
       ) {
         try {
@@ -26,13 +26,13 @@ export const sendInvitationEmailFromUser = extendType({
             where: { clerkUserId },
           });
 
-          const link = `https://kontolmemek.com/signup?email=${email}&firstName=${firstName}&lastName=${lastName}&userId=${user.id}`;
+          const link = `https://app.audea.id/signup?email=${email}&firstName=${firstName}&lastName=${lastName}&token=${jwtToken}`;
 
           const furqonHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
           <p>My name is Furqon and I'm one of the co-founders of Audea.</p>
 
-          <p>${user.firstName} is inviting you to try Audea KONTOL! 🎉</p>
+          <p>${user.firstName} is inviting you to try Audea blablabla! 🎉</p>
 
           <a href="${link}">Try now!</a>`;
 
@@ -40,7 +40,7 @@ export const sendInvitationEmailFromUser = extendType({
 
           <p>My name is Rizqy and I'm one of the co-founders of Audea.</p>
 
-          <p>${user.firstName} is inviting you to try Audea KONTOL! 🎉</p>
+          <p>${user.firstName} is inviting you to try Audea blablabla! 🎉</p>
 
           <a href="${link}">Try now!</a>`;
 
