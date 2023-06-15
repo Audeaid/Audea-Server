@@ -12,7 +12,7 @@ export const searchUserByClerkId = extendType({
 
       async resolve(__, { clerkUserId }, { prisma }, ___) {
         try {
-          const user = await prisma.user.findFirstOrThrow({
+          const user = await prisma.user.findFirst({
             where: { clerkUserId },
           });
 
