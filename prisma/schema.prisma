@@ -8,26 +8,38 @@ datasource db {
 }
 
 model User {
-    id                      String                      @id @default(auto()) @map("_id") @db.ObjectId
-    clerkUserId             String                      @unique
-    firstName               String         
-    lastName                String
-    email                   String                      @unique
-    createdAt               DateTime
-    notionPageId            String?
-    invitedByUserId         String?                     @db.ObjectId
-    subscription            Subscription?
-    content                 Content[]
-    contentSettings         ContentSettings?
-    notionAccount           NotionAccount?
-    darkModePreferences     DarkModePreferences?
-    iOSVote                 IOSVote?
-    androidVote             AndroidVote?
-    androidTableVote        AndroidTabletVote?
-    macOSVote               MacOSVote?
-    windowsVote             WindowsVote?
-    linuxVote               LinuxVote?
-    iPadOSVote              IPadOSVote?
+    id                              String                      @id @default(auto()) @map("_id") @db.ObjectId
+    clerkUserId                     String                      @unique
+    firstName                       String         
+    lastName                        String
+    email                           String                      @unique
+    createdAt                       DateTime
+    notionPageId                    String?
+    invitedByUserId                 String?                     @db.ObjectId
+    subscription                    Subscription?
+    content                         Content[]
+    contentSettings                 ContentSettings?
+    notionAccount                   NotionAccount?
+    darkModePreferences             DarkModePreferences?
+    iOSVote                         IOSVote?
+    androidVote                     AndroidVote?
+    androidTableVote                AndroidTabletVote?
+    macOSVote                       MacOSVote?
+    windowsVote                     WindowsVote?
+    linuxVote                       LinuxVote?
+    iPadOSVote                      IPadOSVote?
+    notionIntegrationRequest        NotionIntegrationRequest?
+    zapierIntegrationRequest        ZapierIntegrationRequest?
+    todoistIntegrationRequest       TodoistIntegrationRequest?
+    whatsappIntegrationRequest      WhatsappIntegrationRequest?
+    sunsamaIntegrationRequest       SunsamaIntegrationRequest?
+    obsidianIntegrationRequest      ObsidianIntegrationRequest?
+    mondayIntegrationRequest        MondayIntegrationRequest?
+    gmailIntegrationRequest         GmailIntegrationRequest?
+    githubIntegrationRequest        GithubIntegrationRequest?
+    evernoteIntegrationRequest      EvernoteIntegrationRequest?
+    craftIntegrationRequest         CraftIntegrationRequest?
+    clickupIntegrationRequest       ClickupIntegrationRequest?
 }
 
 model DeletedAccount {
@@ -106,6 +118,90 @@ model LinuxVote {
 }
 
 model IPadOSVote {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model NotionIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model ZapierIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model TodoistIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model WhatsappIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model SunsamaIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model ObsidianIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model MondayIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model GmailIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model GithubIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model EvernoteIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model CraftIntegrationRequest {
+    id                  String              @id @default(auto()) @map("_id") @db.ObjectId
+    user                User?               @relation(fields: [userId], references: [id])
+    userId              String              @unique @db.ObjectId
+    clerkUserId         String              @unique
+}
+
+model ClickupIntegrationRequest {
     id                  String              @id @default(auto()) @map("_id") @db.ObjectId
     user                User?               @relation(fields: [userId], references: [id])
     userId              String              @unique @db.ObjectId

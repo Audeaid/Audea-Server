@@ -53,6 +53,21 @@ type DeletedUser {
 """The `File` scalar type represents a file upload."""
 scalar File
 
+enum IntegrationsEnum {
+  CLICKUP
+  CRAFT
+  EVERNOTE
+  GITHUB
+  GMAIL
+  MONDAY
+  NOTION
+  OBSIDIAN
+  SUNSAMA
+  TODOIST
+  WHATSAPP
+  ZAPIER
+}
+
 type Mutation {
   createNewContent: Content!
   createNewContentSettings: ContentSettings!
@@ -61,10 +76,12 @@ type Mutation {
   createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!, referralJwt: String): User!
   deleteAccount: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
+  dreamWorkflowForm(longText: String!): ResponseMessage!
   extendTrialSubscription: UserSubscription!
   updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
   updateDarkModePreferences(darkMode: Boolean!): DarkMode!
+  userRequestIntegration(integration: IntegrationsEnum!): RequestedIntegration!
   votePlatform(platform: PlatformVoteEnum!, vote: Boolean!): PlatformVote!
 }
 
@@ -115,6 +132,7 @@ type Query {
   getContentSettings: ContentSettings
   getDarkModePreferences: DarkMode
   getDeletedUser(email: String!): DeletedUser
+  getIntegrationRequest(integration: IntegrationsEnum!): RequestedIntegration
   getOneContent(contentId: String!): Content!
   getPlatformVote(platform: PlatformVoteEnum!): PlatformVote!
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
@@ -127,6 +145,11 @@ type Query {
   searchUserByEmail(email: String!): User
   sendInvitationEmailFromUser(email: String!, firstName: String!, lastName: String!): ResponseMessage!
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
+}
+
+type RequestedIntegration {
+  integration: IntegrationsEnum!
+  requested: Boolean!
 }
 
 type ResponseMessage {

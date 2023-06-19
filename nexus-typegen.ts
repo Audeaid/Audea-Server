@@ -40,6 +40,7 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  IntegrationsEnum: "CLICKUP" | "CRAFT" | "EVERNOTE" | "GITHUB" | "GMAIL" | "MONDAY" | "NOTION" | "OBSIDIAN" | "SUNSAMA" | "TODOIST" | "WHATSAPP" | "ZAPIER"
   OutputLanguageEnum: "ARABIC" | "ASK" | "BAHASAINDONESIA" | "CHINESE" | "ENGLISH" | "FRENCH" | "HINDI" | "JAPANESE" | "RUSSIAN" | "SPANISH" | "TRANSCRIPT" | "URDU"
   PlatformVoteEnum: "ANDROID" | "ANDROIDTABLET" | "IOS" | "IPADOS" | "LINUX" | "MACOS" | "WINDOWS"
   SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
@@ -107,6 +108,10 @@ export interface NexusGenObjects {
     voted: boolean; // Boolean!
   }
   Query: {};
+  RequestedIntegration: { // root type
+    integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!
+    requested: boolean; // Boolean!
+  }
   ResponseMessage: { // root type
     response?: string | null; // String
   }
@@ -193,10 +198,12 @@ export interface NexusGenFieldTypes {
     createUserFromClerk: NexusGenRootTypes['User']; // User!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    dreamWorkflowForm: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     updateDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
+    userRequestIntegration: NexusGenRootTypes['RequestedIntegration']; // RequestedIntegration!
     votePlatform: NexusGenRootTypes['PlatformVote']; // PlatformVote!
   }
   PlatformVote: { // field return type
@@ -218,6 +225,7 @@ export interface NexusGenFieldTypes {
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
+    getIntegrationRequest: NexusGenRootTypes['RequestedIntegration'] | null; // RequestedIntegration
     getOneContent: NexusGenRootTypes['Content']; // Content!
     getPlatformVote: NexusGenRootTypes['PlatformVote']; // PlatformVote!
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
@@ -230,6 +238,10 @@ export interface NexusGenFieldTypes {
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
     sendInvitationEmailFromUser: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+  }
+  RequestedIntegration: { // field return type
+    integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!
+    requested: boolean; // Boolean!
   }
   ResponseMessage: { // field return type
     response: string | null; // String
@@ -317,10 +329,12 @@ export interface NexusGenFieldTypeNames {
     createUserFromClerk: 'User'
     deleteAccount: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
+    dreamWorkflowForm: 'ResponseMessage'
     extendTrialSubscription: 'UserSubscription'
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
     updateDarkModePreferences: 'DarkMode'
+    userRequestIntegration: 'RequestedIntegration'
     votePlatform: 'PlatformVote'
   }
   PlatformVote: { // field return type name
@@ -342,6 +356,7 @@ export interface NexusGenFieldTypeNames {
     getContentSettings: 'ContentSettings'
     getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
+    getIntegrationRequest: 'RequestedIntegration'
     getOneContent: 'Content'
     getPlatformVote: 'PlatformVote'
     getTypeOfPromptFromId: 'TypeOfPrompt'
@@ -354,6 +369,10 @@ export interface NexusGenFieldTypeNames {
     searchUserByEmail: 'User'
     sendInvitationEmailFromUser: 'ResponseMessage'
     sendNewUserEmail: 'ResponseMessage'
+  }
+  RequestedIntegration: { // field return type name
+    integration: 'IntegrationsEnum'
+    requested: 'Boolean'
   }
   ResponseMessage: { // field return type name
     response: 'String'
@@ -414,6 +433,9 @@ export interface NexusGenArgTypes {
     deleteContent: { // args
       contentId: string; // String!
     }
+    dreamWorkflowForm: { // args
+      longText: string; // String!
+    }
     updateContent: { // args
       contentId: string; // String!
       gptGenerated?: string | null; // String
@@ -432,6 +454,9 @@ export interface NexusGenArgTypes {
     updateDarkModePreferences: { // args
       darkMode: boolean; // Boolean!
     }
+    userRequestIntegration: { // args
+      integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!
+    }
     votePlatform: { // args
       platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
       vote: boolean; // Boolean!
@@ -443,6 +468,9 @@ export interface NexusGenArgTypes {
     }
     getDeletedUser: { // args
       email: string; // String!
+    }
+    getIntegrationRequest: { // args
+      integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!
     }
     getOneContent: { // args
       contentId: string; // String!

@@ -10,3 +10,4 @@ export * from './TypeOfPrompt';
 export * from './ContentSettings';
 export * from './DarkMode';
 export * from './PlatformVote';
+export * from './RequestIntegration';
