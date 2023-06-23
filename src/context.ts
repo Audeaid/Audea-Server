@@ -9,6 +9,7 @@ import { Configuration, OpenAIApi } from 'openai';
 import clerk from '@clerk/clerk-sdk-node';
 import { ContextFunction } from '@apollo/server';
 import { ExpressContextFunctionArgument } from '@apollo/server/dist/esm/express4';
+import Stripe from 'stripe';
 
 const pubsub = new PubSub();
 
@@ -36,6 +37,11 @@ const openai = new OpenAIApi(
   })
 );
 
+const stripe = new Stripe.Stripe(process.env.STRIPE_SECRET_KEY!, {
+  // https://github.com/stripe/stripe-node#configuration
+  apiVersion: '2022-11-15',
+});
+
 export interface Context {
   prisma: PrismaClient;
   twilioClient: twilio.Twilio;
@@ -47,6 +53,7 @@ export interface Context {
   clerk: typeof clerk;
   clerkUserId: string | null;
   jwtToken: string | null;
+  stripe: Stripe;
 }
 
 export const context: ContextFunction<
@@ -74,5 +81,6 @@ export const context: ContextFunction<
     s3,
     openai,
     clerk,
+    stripe,
   };
 };

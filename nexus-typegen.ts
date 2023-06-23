@@ -115,6 +115,21 @@ export interface NexusGenObjects {
   ResponseMessage: { // root type
     response?: string | null; // String
   }
+  StripeCustomer: { // root type
+    clerkUserId: string; // String!
+    email: string; // String!
+    id: string; // String!
+    name: string; // String!
+    stripeCustomerId: string; // String!
+    userId: string; // String!
+  }
+  StripePaidObject: { // root type
+    clerkUserId: string; // String!
+    id: string; // String!
+    redeem: boolean; // Boolean!
+    sessionId: string; // String!
+    stripeCustomerDbId: string; // String!
+  }
   Subscription: {};
   TypeOfPrompt: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
@@ -195,11 +210,15 @@ export interface NexusGenFieldTypes {
     createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     createNewDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    createPaidObject: NexusGenRootTypes['StripePaidObject']; // StripePaidObject!
+    createStripeCustomer: NexusGenRootTypes['StripeCustomer']; // StripeCustomer!
     createUserFromClerk: NexusGenRootTypes['User']; // User!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    deleteAllContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     dreamWorkflowForm: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    purchasedSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     updateDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
@@ -227,7 +246,9 @@ export interface NexusGenFieldTypes {
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getIntegrationRequest: NexusGenRootTypes['RequestedIntegration'] | null; // RequestedIntegration
     getOneContent: NexusGenRootTypes['Content']; // Content!
+    getPaidObject: NexusGenRootTypes['StripePaidObject'] | null; // StripePaidObject
     getPlatformVote: NexusGenRootTypes['PlatformVote']; // PlatformVote!
+    getStripeCustomer: NexusGenRootTypes['StripeCustomer'] | null; // StripeCustomer
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
     getUserInfo: NexusGenRootTypes['User']; // User!
     getUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
@@ -245,6 +266,21 @@ export interface NexusGenFieldTypes {
   }
   ResponseMessage: { // field return type
     response: string | null; // String
+  }
+  StripeCustomer: { // field return type
+    clerkUserId: string; // String!
+    email: string; // String!
+    id: string; // String!
+    name: string; // String!
+    stripeCustomerId: string; // String!
+    userId: string; // String!
+  }
+  StripePaidObject: { // field return type
+    clerkUserId: string; // String!
+    id: string; // String!
+    redeem: boolean; // Boolean!
+    sessionId: string; // String!
+    stripeCustomerDbId: string; // String!
   }
   Subscription: { // field return type
     androidTabletVoteSubscription: NexusGenRootTypes['PlatformVoteSubscription'] | null; // PlatformVoteSubscription
@@ -326,11 +362,15 @@ export interface NexusGenFieldTypeNames {
     createNewContentSettings: 'ContentSettings'
     createNewDarkModePreferences: 'DarkMode'
     createNewUserSubscription: 'UserSubscription'
+    createPaidObject: 'StripePaidObject'
+    createStripeCustomer: 'StripeCustomer'
     createUserFromClerk: 'User'
     deleteAccount: 'ResponseMessage'
+    deleteAllContent: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
     dreamWorkflowForm: 'ResponseMessage'
     extendTrialSubscription: 'UserSubscription'
+    purchasedSubscription: 'UserSubscription'
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
     updateDarkModePreferences: 'DarkMode'
@@ -358,7 +398,9 @@ export interface NexusGenFieldTypeNames {
     getDeletedUser: 'DeletedUser'
     getIntegrationRequest: 'RequestedIntegration'
     getOneContent: 'Content'
+    getPaidObject: 'StripePaidObject'
     getPlatformVote: 'PlatformVote'
+    getStripeCustomer: 'StripeCustomer'
     getTypeOfPromptFromId: 'TypeOfPrompt'
     getUserInfo: 'User'
     getUserSubscription: 'UserSubscription'
@@ -376,6 +418,21 @@ export interface NexusGenFieldTypeNames {
   }
   ResponseMessage: { // field return type name
     response: 'String'
+  }
+  StripeCustomer: { // field return type name
+    clerkUserId: 'String'
+    email: 'String'
+    id: 'String'
+    name: 'String'
+    stripeCustomerId: 'String'
+    userId: 'String'
+  }
+  StripePaidObject: { // field return type name
+    clerkUserId: 'String'
+    id: 'String'
+    redeem: 'Boolean'
+    sessionId: 'String'
+    stripeCustomerDbId: 'String'
   }
   Subscription: { // field return type name
     androidTabletVoteSubscription: 'PlatformVoteSubscription'
@@ -423,6 +480,9 @@ export interface NexusGenArgTypes {
     createNewUserSubscription: { // args
       type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
     }
+    createPaidObject: { // args
+      sessionId: string; // String!
+    }
     createUserFromClerk: { // args
       clerkId: string; // String!
       email: string; // String!
@@ -435,6 +495,9 @@ export interface NexusGenArgTypes {
     }
     dreamWorkflowForm: { // args
       longText: string; // String!
+    }
+    purchasedSubscription: { // args
+      type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
     }
     updateContent: { // args
       contentId: string; // String!
@@ -474,6 +537,9 @@ export interface NexusGenArgTypes {
     }
     getOneContent: { // args
       contentId: string; // String!
+    }
+    getPaidObject: { // args
+      sessionId: string; // String!
     }
     getPlatformVote: { // args
       platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!

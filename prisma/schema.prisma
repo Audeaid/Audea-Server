@@ -40,6 +40,27 @@ model User {
     evernoteIntegrationRequest      EvernoteIntegrationRequest?
     craftIntegrationRequest         CraftIntegrationRequest?
     clickupIntegrationRequest       ClickupIntegrationRequest?
+    stripeCustomer                  StripeCustomer?
+}
+
+model StripeCustomer {
+    id                  String                  @id @default(auto()) @map("_id") @db.ObjectId
+    email               String                  @unique
+    name                String
+    stripeCustomerId    String                  @unique
+    clerkUserId         String                  @unique
+    user                User?                   @relation(fields: [userId], references: [id])
+    userId              String                  @unique @db.ObjectId
+    stripePaidObject    StripePaidObject[]
+}
+
+model StripePaidObject {
+    id                      String              @id @default(auto()) @map("_id") @db.ObjectId
+    sessionId               String              @unique
+    clerkUserId             String              
+    stripeCustomer          StripeCustomer?     @relation(fields: [stripeCustomerDbId], references: [id])
+    stripeCustomerDbId      String              @db.ObjectId
+    redeem                  Boolean
 }
 
 model DeletedAccount {

@@ -73,11 +73,15 @@ type Mutation {
   createNewContentSettings: ContentSettings!
   createNewDarkModePreferences(darkMode: Boolean): DarkMode!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
+  createPaidObject(sessionId: String!): StripePaidObject!
+  createStripeCustomer: StripeCustomer!
   createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!, referralJwt: String): User!
   deleteAccount: ResponseMessage!
+  deleteAllContent: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
   dreamWorkflowForm(longText: String!): ResponseMessage!
   extendTrialSubscription: UserSubscription!
+  purchasedSubscription(type: SubscriptionTypeEnum!): UserSubscription!
   updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
   updateDarkModePreferences(darkMode: Boolean!): DarkMode!
@@ -134,7 +138,9 @@ type Query {
   getDeletedUser(email: String!): DeletedUser
   getIntegrationRequest(integration: IntegrationsEnum!): RequestedIntegration
   getOneContent(contentId: String!): Content!
+  getPaidObject(sessionId: String!): StripePaidObject
   getPlatformVote(platform: PlatformVoteEnum!): PlatformVote!
+  getStripeCustomer: StripeCustomer
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
   getUserInfo: User!
   getUserSubscription: UserSubscription!
@@ -155,6 +161,23 @@ type RequestedIntegration {
 type ResponseMessage {
   """Response message"""
   response: String
+}
+
+type StripeCustomer {
+  clerkUserId: String!
+  email: String!
+  id: String!
+  name: String!
+  stripeCustomerId: String!
+  userId: String!
+}
+
+type StripePaidObject {
+  clerkUserId: String!
+  id: String!
+  redeem: Boolean!
+  sessionId: String!
+  stripeCustomerDbId: String!
 }
 
 type Subscription {
