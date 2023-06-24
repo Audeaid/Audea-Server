@@ -30,7 +30,7 @@ export const sendInvitationEmailFromUser = extendType({
 
           const furqonHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
-          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="1200" height="630" >
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >
 
           <p>My name is Furqon and I'm one of the co-founders of Audea.</p>
 
@@ -40,7 +40,7 @@ export const sendInvitationEmailFromUser = extendType({
 
           const bontelHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
-          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="1200" height="630" >
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >
 
           <p>My name is Rizqy and I'm one of the co-founders of Audea.</p>
 
