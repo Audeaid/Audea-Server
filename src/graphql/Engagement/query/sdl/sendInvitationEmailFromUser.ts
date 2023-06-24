@@ -30,6 +30,8 @@ export const sendInvitationEmailFromUser = extendType({
 
           const furqonHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" />
+
           <p>My name is Furqon and I'm one of the co-founders of Audea.</p>
 
           <p>${user.firstName} is inviting you to try Audea blablabla! 🎉</p>
@@ -37,6 +39,8 @@ export const sendInvitationEmailFromUser = extendType({
           <a href="${link}">Try now!</a>`;
 
           const bontelHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
+
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" />
 
           <p>My name is Rizqy and I'm one of the co-founders of Audea.</p>
 
