@@ -79,6 +79,7 @@ type Mutation {
   deleteAccount: ResponseMessage!
   deleteAllContent: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
+  deleteUserIfRegistrationFailed(id: String!, secret: String!): ResponseMessage!
   dreamWorkflowForm(longText: String!): ResponseMessage!
   extendTrialSubscription: UserSubscription!
   purchasedSubscription(type: SubscriptionTypeEnum!): UserSubscription!

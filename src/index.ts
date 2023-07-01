@@ -25,7 +25,7 @@ import { expressMiddleware } from '@apollo/server/express4';
 
   const server = new ApolloServer({
     schema,
-    introspection: process.env.NODE_ENV !== 'production',
+    introspection: process.env.NODE_ENV === 'production' ? false : true,
     plugins: [
       // Proper shutdown for the HTTP server.
       ApolloServerPluginDrainHttpServer({ httpServer }),

@@ -216,6 +216,7 @@ export interface NexusGenFieldTypes {
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteAllContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    deleteUserIfRegistrationFailed: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     dreamWorkflowForm: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     purchasedSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
@@ -368,6 +369,7 @@ export interface NexusGenFieldTypeNames {
     deleteAccount: 'ResponseMessage'
     deleteAllContent: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
+    deleteUserIfRegistrationFailed: 'ResponseMessage'
     dreamWorkflowForm: 'ResponseMessage'
     extendTrialSubscription: 'UserSubscription'
     purchasedSubscription: 'UserSubscription'
@@ -492,6 +494,10 @@ export interface NexusGenArgTypes {
     }
     deleteContent: { // args
       contentId: string; // String!
+    }
+    deleteUserIfRegistrationFailed: { // args
+      id: string; // String!
+      secret: string; // String!
     }
     dreamWorkflowForm: { // args
       longText: string; // String!
