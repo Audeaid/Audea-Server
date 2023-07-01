@@ -16,7 +16,12 @@ export const purchasedSubscription = extendType({
         ),
       },
 
-      async resolve(__, { type }, { prisma, clerkUserId }, ___) {
+      async resolve(
+        __,
+        { type },
+        { prisma, clerkUserId, notionInternal },
+        ___
+      ) {
         try {
           if (!clerkUserId) throw new Error('Invalid token.');
 
@@ -77,6 +82,19 @@ export const purchasedSubscription = extendType({
                   endDateMoment.add(addDays, 'days').toISOString()
                 ),
                 type,
+              },
+            });
+          }
+
+          if (user.notionPageId) {
+            await notionInternal.pages.update({
+              page_id: user.notionPageId,
+              properties: {
+                Subscription: {
+                  select: {
+                    name: 'YES',
+                  },
+                },
               },
             });
           }
