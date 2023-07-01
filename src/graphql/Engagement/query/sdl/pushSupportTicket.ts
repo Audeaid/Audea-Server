@@ -61,7 +61,7 @@ export const pushSupportTicket = extendType({
           });
 
           await resend.sendEmail({
-            from: 'Audea (NO REPLY) <no_reply@kudoku.id>',
+            from: 'Audea (NO REPLY) <no_reply@audea.id>',
             to: user.email,
             subject: 'Issue has been submitted!',
             html: `

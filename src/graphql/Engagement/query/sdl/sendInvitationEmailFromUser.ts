@@ -30,23 +30,23 @@ export const sendInvitationEmailFromUser = extendType({
 
           const furqonHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
-          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >
-
           <p>My name is Furqon and I'm one of the co-founders of Audea.</p>
 
-          <p>${user.firstName} is inviting you to try Audea blablabla! 🎉</p>
+          <p>Your friend, ${user.firstName} has been using Audea to help them convert their messy thoughts to structured notes, and ${user.firstName} says you'll like it too!</p>
 
-          <a href="${link}">Try now!</a>`;
+          <p>You can register with their referral link below:<br><a href="${link}">${link}</a></p>
+          
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >`;
 
           const bontelHtml = `<p>Heyy ${firstName} ${lastName}👋🏼!</p>
 
-          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >
-
           <p>My name is Rizqy and I'm one of the co-founders of Audea.</p>
 
-          <p>${user.firstName} is inviting you to try Audea blablabla! 🎉</p>
+          <p>Your friend, ${user.firstName} has been using Audea to help them convert their messy thoughts to structured notes, and ${user.firstName} says you'll like it too!</p>
 
-          <a href="${link}">Try now!</a>`;
+          <p>You can register with their referral link below:<br><a href="${link}">${link}</a></p>
+          
+          <img src="https://app.audea.id/og?firstName=${firstName}&lastName=${lastName}" alt="Invitation banner" width="600" height="315" >`;
 
           const randomGenerator = Math.round(Math.random()); // 0 or 1
 
@@ -54,13 +54,13 @@ export const sendInvitationEmailFromUser = extendType({
 
           if (randomGenerator === 1) {
             // from furqon
-            sendEmailData.from = 'Furqon @ Audea <furqon@kudoku.id>';
+            sendEmailData.from = 'Furqon @ Audea <furqon@audea.id>';
             sendEmailData.to = email;
             sendEmailData.subject = `${user.firstName} is inviting you to try Audea! 🍙`;
             sendEmailData.html = furqonHtml;
           } else {
             // from bontel
-            sendEmailData.from = 'Rizqy from Audea <rizqy@kudoku.id>';
+            sendEmailData.from = 'Rizqy from Audea <rizqy@audea.id>';
             sendEmailData.to = email;
             sendEmailData.subject = `${user.firstName} is inviting you to try Audea! 🍙`;
             sendEmailData.html = bontelHtml;

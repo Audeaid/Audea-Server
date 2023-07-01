@@ -50,13 +50,13 @@ export const sendNewUserEmail = extendType({
 
           if (randomGenerator === 1) {
             // from furqon
-            sendEmailData.from = 'Furqon @ Audea <furqon@kudoku.id>';
+            sendEmailData.from = 'Furqon @ Audea <furqon@audea.id>';
             sendEmailData.to = email;
             sendEmailData.subject = 'Welcome to Audea! 🌟';
             sendEmailData.html = furqonHtml;
           } else {
             // from bontel
-            sendEmailData.from = 'Rizqy from Audea <rizqy@kudoku.id>';
+            sendEmailData.from = 'Rizqy from Audea <rizqy@audea.id>';
             sendEmailData.to = email;
             sendEmailData.subject = 'Welcome to Audea! 🌟';
             sendEmailData.html = bontelHtml;
