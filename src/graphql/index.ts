@@ -12,3 +12,4 @@ export * from './DarkMode';
 export * from './PlatformVote';
 export * from './RequestIntegration';
 export * from './StripeCustomer';
+export * from './Integrations';

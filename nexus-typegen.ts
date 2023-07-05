@@ -94,7 +94,34 @@ export interface NexusGenObjects {
     email: string; // String!
     id: string; // String!
   }
+  GeneratedNotionPage: { // root type
+    contentId: string; // String!
+    id: string; // String!
+    notionAccountId: string; // String!
+    notionPageId: string; // String!
+    url: string; // String!
+  }
   Mutation: {};
+  NotionAccount: { // root type
+    accessToken: string; // String!
+    automaticPost: boolean; // Boolean!
+    botId: string; // String!
+    clerkUserId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    ownerUserId: string; // String!
+    primaryDatabase?: string | null; // String
+    userId: string; // String!
+    workspaceIcon: string; // String!
+    workspaceId: string; // String!
+    workspaceName: string; // String!
+  }
+  NotionDatabase: { // root type
+    icon?: string | null; // String
+    id: string; // String!
+    title: string; // String!
+    url?: string | null; // String
+  }
   PlatformVote: { // root type
     count: number; // Int!
     platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
@@ -205,7 +232,15 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // String!
   }
+  GeneratedNotionPage: { // field return type
+    contentId: string; // String!
+    id: string; // String!
+    notionAccountId: string; // String!
+    notionPageId: string; // String!
+    url: string; // String!
+  }
   Mutation: { // field return type
+    connectNotionAccount: NexusGenRootTypes['NotionAccount']; // NotionAccount!
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     createNewDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
@@ -217,14 +252,37 @@ export interface NexusGenFieldTypes {
     deleteAllContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteUserIfRegistrationFailed: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    deletingNotionConnection: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     dreamWorkflowForm: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     extendTrialSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    generateNotionPage: NexusGenRootTypes['GeneratedNotionPage']; // GeneratedNotionPage!
     purchasedSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
+    setNotionPrimaryDatabase: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     updateContent: NexusGenRootTypes['Content']; // Content!
     updateContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     updateDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
     userRequestIntegration: NexusGenRootTypes['RequestedIntegration']; // RequestedIntegration!
     votePlatform: NexusGenRootTypes['PlatformVote']; // PlatformVote!
+  }
+  NotionAccount: { // field return type
+    accessToken: string; // String!
+    automaticPost: boolean; // Boolean!
+    botId: string; // String!
+    clerkUserId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: string; // String!
+    ownerUserId: string; // String!
+    primaryDatabase: string | null; // String
+    userId: string; // String!
+    workspaceIcon: string; // String!
+    workspaceId: string; // String!
+    workspaceName: string; // String!
+  }
+  NotionDatabase: { // field return type
+    icon: string | null; // String
+    id: string; // String!
+    title: string; // String!
+    url: string | null; // String
   }
   PlatformVote: { // field return type
     count: number; // Int!
@@ -240,12 +298,15 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     checkIfAlreadyVotedPlatform: NexusGenRootTypes['PlatformVoteUser']; // PlatformVoteUser!
+    getAllAllowedNotionDatabase: NexusGenRootTypes['NotionDatabase'][] | null; // [NotionDatabase!]
     getAllContent: NexusGenRootTypes['Content'][] | null; // [Content!]
     getAllTypeOfPrompt: NexusGenRootTypes['TypeOfPrompt'][]; // [TypeOfPrompt!]!
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getIntegrationRequest: NexusGenRootTypes['RequestedIntegration'] | null; // RequestedIntegration
+    getNotionAccount: NexusGenRootTypes['NotionAccount'] | null; // NotionAccount
+    getNotionTitleName: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
     getPaidObject: NexusGenRootTypes['StripePaidObject'] | null; // StripePaidObject
     getPlatformVote: NexusGenRootTypes['PlatformVote']; // PlatformVote!
@@ -358,7 +419,15 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'String'
   }
+  GeneratedNotionPage: { // field return type name
+    contentId: 'String'
+    id: 'String'
+    notionAccountId: 'String'
+    notionPageId: 'String'
+    url: 'String'
+  }
   Mutation: { // field return type name
+    connectNotionAccount: 'NotionAccount'
     createNewContent: 'Content'
     createNewContentSettings: 'ContentSettings'
     createNewDarkModePreferences: 'DarkMode'
@@ -370,14 +439,37 @@ export interface NexusGenFieldTypeNames {
     deleteAllContent: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
     deleteUserIfRegistrationFailed: 'ResponseMessage'
+    deletingNotionConnection: 'ResponseMessage'
     dreamWorkflowForm: 'ResponseMessage'
     extendTrialSubscription: 'UserSubscription'
+    generateNotionPage: 'GeneratedNotionPage'
     purchasedSubscription: 'UserSubscription'
+    setNotionPrimaryDatabase: 'ResponseMessage'
     updateContent: 'Content'
     updateContentSettings: 'ContentSettings'
     updateDarkModePreferences: 'DarkMode'
     userRequestIntegration: 'RequestedIntegration'
     votePlatform: 'PlatformVote'
+  }
+  NotionAccount: { // field return type name
+    accessToken: 'String'
+    automaticPost: 'Boolean'
+    botId: 'String'
+    clerkUserId: 'String'
+    createdAt: 'DateTime'
+    id: 'String'
+    ownerUserId: 'String'
+    primaryDatabase: 'String'
+    userId: 'String'
+    workspaceIcon: 'String'
+    workspaceId: 'String'
+    workspaceName: 'String'
+  }
+  NotionDatabase: { // field return type name
+    icon: 'String'
+    id: 'String'
+    title: 'String'
+    url: 'String'
   }
   PlatformVote: { // field return type name
     count: 'Int'
@@ -393,12 +485,15 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     checkIfAlreadyVotedPlatform: 'PlatformVoteUser'
+    getAllAllowedNotionDatabase: 'NotionDatabase'
     getAllContent: 'Content'
     getAllTypeOfPrompt: 'TypeOfPrompt'
     getContentSettings: 'ContentSettings'
     getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
     getIntegrationRequest: 'RequestedIntegration'
+    getNotionAccount: 'NotionAccount'
+    getNotionTitleName: 'ResponseMessage'
     getOneContent: 'Content'
     getPaidObject: 'StripePaidObject'
     getPlatformVote: 'PlatformVote'
@@ -476,6 +571,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    connectNotionAccount: { // args
+      notionCode: string; // String!
+    }
     createNewDarkModePreferences: { // args
       darkMode?: boolean | null; // Boolean
     }
@@ -502,8 +600,16 @@ export interface NexusGenArgTypes {
     dreamWorkflowForm: { // args
       longText: string; // String!
     }
+    generateNotionPage: { // args
+      contentId: string; // String!
+      notionTitleName: string; // String!
+    }
     purchasedSubscription: { // args
       type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
+    }
+    setNotionPrimaryDatabase: { // args
+      automatic?: boolean | null; // Boolean
+      id: string; // String!
     }
     updateContent: { // args
       contentId: string; // String!
