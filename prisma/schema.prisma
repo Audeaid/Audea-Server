@@ -284,7 +284,7 @@ enum OutputLanguage {
 model NotionAccount {
     id                      String                  @id @default(auto()) @map("_id") @db.ObjectId
     createdAt               DateTime
-    accessToken             String                  @unique
+    accessToken             String                  
     workspaceName           String
     workspaceIcon           String
     workspaceId             String
