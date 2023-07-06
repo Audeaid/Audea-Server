@@ -292,7 +292,7 @@ model NotionAccount {
     botId                   String
     primaryDatabase         String?
     automaticPost           Boolean
-    user                    User                    @relation(fields: [userId], references: [id])
+    user                    User?                   @relation(fields: [userId], references: [id])
     userId                  String                  @db.ObjectId @unique
     clerkUserId             String                  @unique
     generatedNotionPage     GeneratedNotionPage[]
@@ -302,8 +302,8 @@ model GeneratedNotionPage {
     id                      String              @id @default(auto()) @map("_id") @db.ObjectId
     notionPageId            String              @unique
     url                     String
-    content                 Content             @relation(fields: [contentId], references: [id])
+    content                 Content?            @relation(fields: [contentId], references: [id])
     contentId               String              @unique @db.ObjectId
-    notionAccount           NotionAccount       @relation(fields: [notionAccountId], references: [id])
+    notionAccount           NotionAccount?      @relation(fields: [notionAccountId], references: [id])
     notionAccountId         String              @db.ObjectId
 }
