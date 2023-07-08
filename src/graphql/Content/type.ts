@@ -13,9 +13,6 @@ export const Content = objectType({
     t.nonNull.string('userId');
     t.string('writingStyle');
     t.field('outputLanguage', { type: 'OutputLanguageEnum' });
-    // t.field('generatedNotionPage', {
-    //     type: 'GeneratedNotionPage'
-    // })
   },
 });
 

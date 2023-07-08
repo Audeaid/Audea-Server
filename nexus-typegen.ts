@@ -112,7 +112,7 @@ export interface NexusGenObjects {
     ownerUserId: string; // String!
     primaryDatabase?: string | null; // String
     userId: string; // String!
-    workspaceIcon: string; // String!
+    workspaceIcon?: string | null; // String
     workspaceId: string; // String!
     workspaceName: string; // String!
   }
@@ -274,7 +274,7 @@ export interface NexusGenFieldTypes {
     ownerUserId: string; // String!
     primaryDatabase: string | null; // String
     userId: string; // String!
-    workspaceIcon: string; // String!
+    workspaceIcon: string | null; // String
     workspaceId: string; // String!
     workspaceName: string; // String!
   }
@@ -304,6 +304,7 @@ export interface NexusGenFieldTypes {
     getContentSettings: NexusGenRootTypes['ContentSettings'] | null; // ContentSettings
     getDarkModePreferences: NexusGenRootTypes['DarkMode'] | null; // DarkMode
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
+    getGeneratedNotionPage: NexusGenRootTypes['GeneratedNotionPage'] | null; // GeneratedNotionPage
     getIntegrationRequest: NexusGenRootTypes['RequestedIntegration'] | null; // RequestedIntegration
     getNotionAccount: NexusGenRootTypes['NotionAccount'] | null; // NotionAccount
     getNotionTitleName: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
@@ -491,6 +492,7 @@ export interface NexusGenFieldTypeNames {
     getContentSettings: 'ContentSettings'
     getDarkModePreferences: 'DarkMode'
     getDeletedUser: 'DeletedUser'
+    getGeneratedNotionPage: 'GeneratedNotionPage'
     getIntegrationRequest: 'RequestedIntegration'
     getNotionAccount: 'NotionAccount'
     getNotionTitleName: 'ResponseMessage'
@@ -643,6 +645,9 @@ export interface NexusGenArgTypes {
     }
     getDeletedUser: { // args
       email: string; // String!
+    }
+    getGeneratedNotionPage: { // args
+      contentId: string; // String!
     }
     getIntegrationRequest: { // args
       integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!

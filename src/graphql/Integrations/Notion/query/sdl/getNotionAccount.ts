@@ -1,4 +1,3 @@
-import { Client } from '@notionhq/client';
 import { extendType } from 'nexus';
 
 export const getNotionAccount = extendType({

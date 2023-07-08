@@ -7,7 +7,7 @@ export const NotionAccount = objectType({
     t.nonNull.dateTime('createdAt');
     t.nonNull.string('accessToken');
     t.nonNull.string('workspaceName');
-    t.nonNull.string('workspaceIcon');
+    t.string('workspaceIcon');
     t.nonNull.string('workspaceId');
     t.nonNull.string('ownerUserId');
     t.nonNull.string('botId');

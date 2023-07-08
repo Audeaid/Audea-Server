@@ -286,7 +286,7 @@ model NotionAccount {
     createdAt               DateTime
     accessToken             String                  
     workspaceName           String
-    workspaceIcon           String
+    workspaceIcon           String?
     workspaceId             String
     ownerUserId             String
     botId                   String
