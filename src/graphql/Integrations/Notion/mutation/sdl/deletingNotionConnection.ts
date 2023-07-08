@@ -19,12 +19,12 @@ export const deletingNotionConnection = extendType({
             where: { userId: user.id },
           });
 
-          await prisma.notionAccount.delete({
-            where: { id: notionAccount.id },
-          });
-
           await prisma.generatedNotionPage.deleteMany({
             where: { notionAccountId: notionAccount.id },
+          });
+
+          await prisma.notionAccount.delete({
+            where: { id: notionAccount.id },
           });
 
           return { response: 'Successfully delete notion account' };
