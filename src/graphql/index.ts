@@ -13,3 +13,4 @@ export * from './PlatformVote';
 export * from './RequestIntegration';
 export * from './StripeCustomer';
 export * from './Integrations';
+export * from './SharedContent';

@@ -1,4 +1,4 @@
-import { enumType, objectType } from 'nexus';
+import { objectType } from 'nexus';
 
 export const User = objectType({
   name: 'User',
@@ -9,6 +9,7 @@ export const User = objectType({
     t.nonNull.string('email');
     t.nonNull.dateTime('createdAt');
     t.nonNull.string('clerkUserId');
+    t.string('username');
   },
 });
 

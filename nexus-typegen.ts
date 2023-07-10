@@ -142,6 +142,17 @@ export interface NexusGenObjects {
   ResponseMessage: { // root type
     response?: string | null; // String
   }
+  SharedContent: { // root type
+    contentId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    generatedId: string; // String!
+    gptObject: string; // String!
+    id: string; // String!
+    title: string; // String!
+    userId: string; // String!
+    username: string; // String!
+  }
   StripeCustomer: { // root type
     clerkUserId: string; // String!
     email: string; // String!
@@ -171,6 +182,7 @@ export interface NexusGenObjects {
     firstName: string; // String!
     id: string; // String!
     lastName: string; // String!
+    username?: string | null; // String
   }
   UserSubscription: { // root type
     clerkUserId: string; // String!
@@ -240,17 +252,20 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Mutation: { // field return type
+    addUsername: NexusGenRootTypes['User']; // User!
     connectNotionAccount: NexusGenRootTypes['NotionAccount']; // NotionAccount!
     createNewContent: NexusGenRootTypes['Content']; // Content!
     createNewContentSettings: NexusGenRootTypes['ContentSettings']; // ContentSettings!
     createNewDarkModePreferences: NexusGenRootTypes['DarkMode']; // DarkMode!
     createNewUserSubscription: NexusGenRootTypes['UserSubscription']; // UserSubscription!
     createPaidObject: NexusGenRootTypes['StripePaidObject']; // StripePaidObject!
+    createSharedContent: NexusGenRootTypes['SharedContent']; // SharedContent!
     createStripeCustomer: NexusGenRootTypes['StripeCustomer']; // StripeCustomer!
     createUserFromClerk: NexusGenRootTypes['User']; // User!
     deleteAccount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteAllContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deleteContent: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
+    deleteSharedContent: NexusGenRootTypes['SharedContent']; // SharedContent!
     deleteUserIfRegistrationFailed: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     deletingNotionConnection: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     dreamWorkflowForm: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
@@ -311,6 +326,8 @@ export interface NexusGenFieldTypes {
     getOneContent: NexusGenRootTypes['Content']; // Content!
     getPaidObject: NexusGenRootTypes['StripePaidObject'] | null; // StripePaidObject
     getPlatformVote: NexusGenRootTypes['PlatformVote']; // PlatformVote!
+    getSharedContent: NexusGenRootTypes['SharedContent'] | null; // SharedContent
+    getSharedContentByContentId: NexusGenRootTypes['SharedContent'] | null; // SharedContent
     getStripeCustomer: NexusGenRootTypes['StripeCustomer'] | null; // StripeCustomer
     getTypeOfPromptFromId: NexusGenRootTypes['TypeOfPrompt'] | null; // TypeOfPrompt
     getUserInfo: NexusGenRootTypes['User']; // User!
@@ -320,6 +337,7 @@ export interface NexusGenFieldTypes {
     pushSupportTicket: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     searchUserByClerkId: NexusGenRootTypes['User'] | null; // User
     searchUserByEmail: NexusGenRootTypes['User'] | null; // User
+    searchUserByUsername: NexusGenRootTypes['User'] | null; // User
     sendInvitationEmailFromUser: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     sendNewUserEmail: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
   }
@@ -329,6 +347,17 @@ export interface NexusGenFieldTypes {
   }
   ResponseMessage: { // field return type
     response: string | null; // String
+  }
+  SharedContent: { // field return type
+    contentId: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: string; // String!
+    generatedId: string; // String!
+    gptObject: string; // String!
+    id: string; // String!
+    title: string; // String!
+    userId: string; // String!
+    username: string; // String!
   }
   StripeCustomer: { // field return type
     clerkUserId: string; // String!
@@ -369,6 +398,7 @@ export interface NexusGenFieldTypes {
     firstName: string; // String!
     id: string; // String!
     lastName: string; // String!
+    username: string | null; // String
   }
   UserSubscription: { // field return type
     clerkUserId: string; // String!
@@ -428,17 +458,20 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Mutation: { // field return type name
+    addUsername: 'User'
     connectNotionAccount: 'NotionAccount'
     createNewContent: 'Content'
     createNewContentSettings: 'ContentSettings'
     createNewDarkModePreferences: 'DarkMode'
     createNewUserSubscription: 'UserSubscription'
     createPaidObject: 'StripePaidObject'
+    createSharedContent: 'SharedContent'
     createStripeCustomer: 'StripeCustomer'
     createUserFromClerk: 'User'
     deleteAccount: 'ResponseMessage'
     deleteAllContent: 'ResponseMessage'
     deleteContent: 'ResponseMessage'
+    deleteSharedContent: 'SharedContent'
     deleteUserIfRegistrationFailed: 'ResponseMessage'
     deletingNotionConnection: 'ResponseMessage'
     dreamWorkflowForm: 'ResponseMessage'
@@ -499,6 +532,8 @@ export interface NexusGenFieldTypeNames {
     getOneContent: 'Content'
     getPaidObject: 'StripePaidObject'
     getPlatformVote: 'PlatformVote'
+    getSharedContent: 'SharedContent'
+    getSharedContentByContentId: 'SharedContent'
     getStripeCustomer: 'StripeCustomer'
     getTypeOfPromptFromId: 'TypeOfPrompt'
     getUserInfo: 'User'
@@ -508,6 +543,7 @@ export interface NexusGenFieldTypeNames {
     pushSupportTicket: 'ResponseMessage'
     searchUserByClerkId: 'User'
     searchUserByEmail: 'User'
+    searchUserByUsername: 'User'
     sendInvitationEmailFromUser: 'ResponseMessage'
     sendNewUserEmail: 'ResponseMessage'
   }
@@ -517,6 +553,17 @@ export interface NexusGenFieldTypeNames {
   }
   ResponseMessage: { // field return type name
     response: 'String'
+  }
+  SharedContent: { // field return type name
+    contentId: 'String'
+    createdAt: 'DateTime'
+    description: 'String'
+    generatedId: 'String'
+    gptObject: 'String'
+    id: 'String'
+    title: 'String'
+    userId: 'String'
+    username: 'String'
   }
   StripeCustomer: { // field return type name
     clerkUserId: 'String'
@@ -557,6 +604,7 @@ export interface NexusGenFieldTypeNames {
     firstName: 'String'
     id: 'String'
     lastName: 'String'
+    username: 'String'
   }
   UserSubscription: { // field return type name
     clerkUserId: 'String'
@@ -573,6 +621,9 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addUsername: { // args
+      username: string; // String!
+    }
     connectNotionAccount: { // args
       notionCode: string; // String!
     }
@@ -585,6 +636,9 @@ export interface NexusGenArgTypes {
     createPaidObject: { // args
       sessionId: string; // String!
     }
+    createSharedContent: { // args
+      contentId: string; // String!
+    }
     createUserFromClerk: { // args
       clerkId: string; // String!
       email: string; // String!
@@ -593,6 +647,9 @@ export interface NexusGenArgTypes {
       referralJwt?: string | null; // String
     }
     deleteContent: { // args
+      contentId: string; // String!
+    }
+    deleteSharedContent: { // args
       contentId: string; // String!
     }
     deleteUserIfRegistrationFailed: { // args
@@ -661,6 +718,13 @@ export interface NexusGenArgTypes {
     getPlatformVote: { // args
       platform: NexusGenEnums['PlatformVoteEnum']; // PlatformVoteEnum!
     }
+    getSharedContent: { // args
+      generatedId: string; // String!
+      username: string; // String!
+    }
+    getSharedContentByContentId: { // args
+      contentId: string; // String!
+    }
     getTypeOfPromptFromId: { // args
       typeOfPromptId: string; // String!
     }
@@ -684,6 +748,9 @@ export interface NexusGenArgTypes {
     }
     searchUserByEmail: { // args
       email: string; // String!
+    }
+    searchUserByUsername: { // args
+      username: string; // String!
     }
     sendInvitationEmailFromUser: { // args
       email: string; // String!

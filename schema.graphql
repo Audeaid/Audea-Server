@@ -77,17 +77,20 @@ enum IntegrationsEnum {
 }
 
 type Mutation {
+  addUsername(username: String!): User!
   connectNotionAccount(notionCode: String!): NotionAccount!
   createNewContent: Content!
   createNewContentSettings: ContentSettings!
   createNewDarkModePreferences(darkMode: Boolean): DarkMode!
   createNewUserSubscription(type: SubscriptionTypeEnum!): UserSubscription!
   createPaidObject(sessionId: String!): StripePaidObject!
+  createSharedContent(contentId: String!): SharedContent!
   createStripeCustomer: StripeCustomer!
   createUserFromClerk(clerkId: String!, email: String!, firstName: String!, lastName: String!, referralJwt: String): User!
   deleteAccount: ResponseMessage!
   deleteAllContent: ResponseMessage!
   deleteContent(contentId: String!): ResponseMessage!
+  deleteSharedContent(contentId: String!): SharedContent!
   deleteUserIfRegistrationFailed(id: String!, secret: String!): ResponseMessage!
   deletingNotionConnection: ResponseMessage!
   dreamWorkflowForm(longText: String!): ResponseMessage!
@@ -179,6 +182,8 @@ type Query {
   getOneContent(contentId: String!): Content!
   getPaidObject(sessionId: String!): StripePaidObject
   getPlatformVote(platform: PlatformVoteEnum!): PlatformVote!
+  getSharedContent(generatedId: String!, username: String!): SharedContent
+  getSharedContentByContentId(contentId: String!): SharedContent
   getStripeCustomer: StripeCustomer
   getTypeOfPromptFromId(typeOfPromptId: String!): TypeOfPrompt
   getUserInfo: User!
@@ -188,6 +193,7 @@ type Query {
   pushSupportTicket(area: String!, description: String!, severityLevel: String!, subject: String!): ResponseMessage!
   searchUserByClerkId(clerkUserId: String!): User
   searchUserByEmail(email: String!): User
+  searchUserByUsername(username: String!): User
   sendInvitationEmailFromUser(email: String!, firstName: String!, lastName: String!): ResponseMessage!
   sendNewUserEmail(email: String!, name: String!): ResponseMessage!
 }
@@ -200,6 +206,18 @@ type RequestedIntegration {
 type ResponseMessage {
   """Response message"""
   response: String
+}
+
+type SharedContent {
+  contentId: String!
+  createdAt: DateTime!
+  description: String!
+  generatedId: String!
+  gptObject: String!
+  id: String!
+  title: String!
+  userId: String!
+  username: String!
 }
 
 type StripeCustomer {
@@ -257,6 +275,7 @@ type User {
   firstName: String!
   id: String!
   lastName: String!
+  username: String
 }
 
 type UserSubscription {
