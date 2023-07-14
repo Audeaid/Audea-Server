@@ -177,6 +177,7 @@ type Query {
   getDeletedUser(email: String!): DeletedUser
   getGeneratedNotionPage(contentId: String!): GeneratedNotionPage
   getIntegrationRequest(integration: IntegrationsEnum!): RequestedIntegration
+  getLifetimeSubscriptionCount(type: SubscriptionTypeEnum!): ResponseMessage!
   getNotionAccount: NotionAccount
   getNotionTitleName: ResponseMessage!
   getOneContent(contentId: String!): Content!
@@ -256,6 +257,7 @@ type Subscription {
 enum SubscriptionTypeEnum {
   EARLYADOPTER
   LIFETIME
+  LIFETIME60
   MONTHLY
   TRIAL
   YEARLY

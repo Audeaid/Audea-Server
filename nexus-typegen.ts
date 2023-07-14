@@ -43,7 +43,7 @@ export interface NexusGenEnums {
   IntegrationsEnum: "CLICKUP" | "CRAFT" | "EVERNOTE" | "GITHUB" | "GMAIL" | "MONDAY" | "NOTION" | "OBSIDIAN" | "SUNSAMA" | "TODOIST" | "WHATSAPP" | "ZAPIER"
   OutputLanguageEnum: "ARABIC" | "ASK" | "BAHASAINDONESIA" | "CHINESE" | "ENGLISH" | "FRENCH" | "HINDI" | "JAPANESE" | "RUSSIAN" | "SPANISH" | "TRANSCRIPT" | "URDU"
   PlatformVoteEnum: "ANDROID" | "ANDROIDTABLET" | "IOS" | "IPADOS" | "LINUX" | "MACOS" | "WINDOWS"
-  SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "MONTHLY" | "TRIAL" | "YEARLY"
+  SubscriptionTypeEnum: "EARLYADOPTER" | "LIFETIME" | "LIFETIME60" | "MONTHLY" | "TRIAL" | "YEARLY"
   typeOfMutationType: "ADD" | "DELETE" | "EDIT"
 }
 
@@ -321,6 +321,7 @@ export interface NexusGenFieldTypes {
     getDeletedUser: NexusGenRootTypes['DeletedUser'] | null; // DeletedUser
     getGeneratedNotionPage: NexusGenRootTypes['GeneratedNotionPage'] | null; // GeneratedNotionPage
     getIntegrationRequest: NexusGenRootTypes['RequestedIntegration'] | null; // RequestedIntegration
+    getLifetimeSubscriptionCount: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getNotionAccount: NexusGenRootTypes['NotionAccount'] | null; // NotionAccount
     getNotionTitleName: NexusGenRootTypes['ResponseMessage']; // ResponseMessage!
     getOneContent: NexusGenRootTypes['Content']; // Content!
@@ -527,6 +528,7 @@ export interface NexusGenFieldTypeNames {
     getDeletedUser: 'DeletedUser'
     getGeneratedNotionPage: 'GeneratedNotionPage'
     getIntegrationRequest: 'RequestedIntegration'
+    getLifetimeSubscriptionCount: 'ResponseMessage'
     getNotionAccount: 'NotionAccount'
     getNotionTitleName: 'ResponseMessage'
     getOneContent: 'Content'
@@ -708,6 +710,9 @@ export interface NexusGenArgTypes {
     }
     getIntegrationRequest: { // args
       integration: NexusGenEnums['IntegrationsEnum']; // IntegrationsEnum!
+    }
+    getLifetimeSubscriptionCount: { // args
+      type: NexusGenEnums['SubscriptionTypeEnum']; // SubscriptionTypeEnum!
     }
     getOneContent: { // args
       contentId: string; // String!

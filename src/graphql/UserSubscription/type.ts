@@ -21,5 +21,12 @@ export const UserSubscription = objectType({
 
 export const SubscriptionTypeEnum = enumType({
   name: 'SubscriptionTypeEnum',
-  members: ['TRIAL', 'MONTHLY', 'LIFETIME', 'YEARLY', 'EARLYADOPTER'],
+  members: [
+    'TRIAL',
+    'MONTHLY',
+    'LIFETIME',
+    'LIFETIME60',
+    'YEARLY',
+    'EARLYADOPTER',
+  ],
 });

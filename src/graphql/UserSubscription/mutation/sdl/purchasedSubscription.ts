@@ -45,7 +45,7 @@ export const purchasedSubscription = extendType({
             addDays = 30;
           } else if (type === 'YEARLY') {
             addDays = 365;
-          } else if (type === 'LIFETIME') {
+          } else if (type === 'LIFETIME60') {
             addDays = 365250; // 1000 years
           } else {
             throw new Error('Invalid SubscriptionTypeEnum for this mutation.');

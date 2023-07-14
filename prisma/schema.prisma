@@ -86,6 +86,7 @@ enum SubscriptionType {
     TRIAL
     MONTHLY
     LIFETIME
+    LIFETIME60
     YEARLY
     EARLYADOPTER
 }
