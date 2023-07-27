@@ -7,11 +7,11 @@ type Content {
   gptGenerated: String
   id: String!
   outputLanguage: OutputLanguageEnum
+  s3ObjectName: String
   title: String
   transcript: String
   typeOfPromptId: String
   userId: String!
-  voiceNoteUrl: String
   writingStyle: String
 }
 
@@ -98,7 +98,7 @@ type Mutation {
   generateNotionPage(contentId: String!, notionTitleName: String!): GeneratedNotionPage!
   purchasedSubscription(type: SubscriptionTypeEnum!): UserSubscription!
   setNotionPrimaryDatabase(automatic: Boolean, id: String!): ResponseMessage!
-  updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, title: String, transcript: String, typeOfPromptId: String, voiceNoteUrl: String, writingStyle: String): Content!
+  updateContent(contentId: String!, gptGenerated: String, outputLanguage: OutputLanguageEnum, s3ObjectName: String, title: String, transcript: String, typeOfPromptId: String, writingStyle: String): Content!
   updateContentSettings(outputLanguage: OutputLanguageEnum, typeOfPromptId: String, writingStyle: String): ContentSettings!
   updateDarkModePreferences(darkMode: Boolean!): DarkMode!
   userRequestIntegration(integration: IntegrationsEnum!): RequestedIntegration!

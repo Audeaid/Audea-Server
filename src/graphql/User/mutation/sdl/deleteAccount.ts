@@ -24,14 +24,17 @@ export const deleteAccount = extendType({
           });
 
           const s3objectsToDelete: { Key: string }[] = content
-            .map((val) => val.voiceNoteUrl)
-            .filter((url): url is string => url !== null && url !== undefined)
-            .map((url) => ({ Key: url.split('/').pop() as string }));
+            .map((val) => val.s3ObjectName)
+            .filter(
+              (s3ObjectName): s3ObjectName is string =>
+                s3ObjectName !== null && s3ObjectName !== undefined
+            )
+            .map((s3ObjectName) => ({ Key: s3ObjectName as string }));
 
           if (s3objectsToDelete.length > 0) {
             await s3
               .deleteObjects({
-                Bucket: 'audea-voice-note',
+                Bucket: 'audea-us',
                 Delete: { Objects: s3objectsToDelete },
               })
               .promise();

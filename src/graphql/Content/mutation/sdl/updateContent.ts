@@ -10,7 +10,7 @@ export const updateContent = extendType({
       args: {
         contentId: nonNull(stringArg()),
         title: stringArg(),
-        voiceNoteUrl: stringArg(),
+        s3ObjectName: stringArg(),
         transcript: stringArg(),
         gptGenerated: stringArg(),
         typeOfPromptId: stringArg(),
@@ -23,7 +23,7 @@ export const updateContent = extendType({
         {
           contentId,
           title,
-          voiceNoteUrl,
+          s3ObjectName,
           transcript,
           gptGenerated,
           typeOfPromptId,
@@ -38,7 +38,7 @@ export const updateContent = extendType({
 
           if (
             !title &&
-            !voiceNoteUrl &&
+            !s3ObjectName &&
             !transcript &&
             !gptGenerated &&
             !typeOfPromptId &&
@@ -59,7 +59,7 @@ export const updateContent = extendType({
             where: { id: content.id },
             data: {
               title: title ?? content.title,
-              voiceNoteUrl: voiceNoteUrl ?? content.voiceNoteUrl,
+              s3ObjectName: s3ObjectName ?? content.s3ObjectName,
               transcript: transcript ?? content.transcript,
               gptGenerated: gptGenerated ?? content.gptGenerated,
               typeOfPromptId: typeOfPromptId ?? content.typeOfPromptId,
@@ -77,7 +77,7 @@ export const updateContent = extendType({
             id: response.id,
             createdAt: response.createdAt,
             title: response.title,
-            voiceNoteUrl: response.voiceNoteUrl,
+            s3ObjectName: response.s3ObjectName,
             transcript: response.transcript,
             gptGenerated: response.gptGenerated,
             typeOfPromptId: response.typeOfPromptId,

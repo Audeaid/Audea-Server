@@ -6,7 +6,7 @@ export const Content = objectType({
     t.nonNull.string('id');
     t.nonNull.dateTime('createdAt');
     t.string('title');
-    t.string('voiceNoteUrl');
+    t.string('s3ObjectName');
     t.string('transcript');
     t.string('gptGenerated');
     t.string('typeOfPromptId');

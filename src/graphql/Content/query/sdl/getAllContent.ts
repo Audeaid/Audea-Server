@@ -27,7 +27,7 @@ export const getAllContent = extendType({
                 id: val.id,
                 createdAt: val.createdAt,
                 title: val.title,
-                voiceNoteUrl: val.voiceNoteUrl,
+                s3ObjectName: val.s3ObjectName,
                 transcript: val.transcript,
                 gptGenerated: val.gptGenerated,
                 typeOfPromptId: val.typeOfPromptId,

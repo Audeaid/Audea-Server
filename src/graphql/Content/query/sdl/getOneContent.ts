@@ -26,7 +26,7 @@ export const getOneContent = extendType({
             id: content.id,
             createdAt: content.createdAt,
             title: content.title,
-            voiceNoteUrl: content.voiceNoteUrl,
+            s3ObjectName: content.s3ObjectName,
             transcript: content.transcript,
             gptGenerated: content.gptGenerated,
             typeOfPromptId: content.typeOfPromptId,

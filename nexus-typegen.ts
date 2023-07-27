@@ -63,11 +63,11 @@ export interface NexusGenObjects {
     gptGenerated?: string | null; // String
     id: string; // String!
     outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
+    s3ObjectName?: string | null; // String
     title?: string | null; // String
     transcript?: string | null; // String
     typeOfPromptId?: string | null; // String
     userId: string; // String!
-    voiceNoteUrl?: string | null; // String
     writingStyle?: string | null; // String
   }
   ContentSettings: { // root type
@@ -213,11 +213,11 @@ export interface NexusGenFieldTypes {
     gptGenerated: string | null; // String
     id: string; // String!
     outputLanguage: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
+    s3ObjectName: string | null; // String
     title: string | null; // String
     transcript: string | null; // String
     typeOfPromptId: string | null; // String
     userId: string; // String!
-    voiceNoteUrl: string | null; // String
     writingStyle: string | null; // String
   }
   ContentSettings: { // field return type
@@ -420,11 +420,11 @@ export interface NexusGenFieldTypeNames {
     gptGenerated: 'String'
     id: 'String'
     outputLanguage: 'OutputLanguageEnum'
+    s3ObjectName: 'String'
     title: 'String'
     transcript: 'String'
     typeOfPromptId: 'String'
     userId: 'String'
-    voiceNoteUrl: 'String'
     writingStyle: 'String'
   }
   ContentSettings: { // field return type name
@@ -676,10 +676,10 @@ export interface NexusGenArgTypes {
       contentId: string; // String!
       gptGenerated?: string | null; // String
       outputLanguage?: NexusGenEnums['OutputLanguageEnum'] | null; // OutputLanguageEnum
+      s3ObjectName?: string | null; // String
       title?: string | null; // String
       transcript?: string | null; // String
       typeOfPromptId?: string | null; // String
-      voiceNoteUrl?: string | null; // String
       writingStyle?: string | null; // String
     }
     updateContentSettings: { // args

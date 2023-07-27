@@ -245,7 +245,7 @@ model Content {
     id                      String                  @id @default(auto()) @map("_id") @db.ObjectId
     createdAt               DateTime
     title                   String?
-    voiceNoteUrl            String?
+    s3ObjectName            String?
     transcript              String?
     gptGenerated            String?
     typeOfPrompt            TypeOfPrompt?           @relation(fields: [typeOfPromptId], references: [id])

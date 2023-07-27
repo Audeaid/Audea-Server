@@ -28,11 +28,11 @@ export const deleteContent = extendType({
             where: { id: contentId },
           });
 
-          if (content.voiceNoteUrl) {
+          if (content.s3ObjectName) {
             await s3
               .deleteObject({
-                Bucket: 'audea-voice-note',
-                Key: content.voiceNoteUrl.split('/').pop() as string,
+                Bucket: 'audea-us',
+                Key: content.s3ObjectName,
               })
               .promise();
           }
