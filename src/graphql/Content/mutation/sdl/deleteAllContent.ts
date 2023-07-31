@@ -36,8 +36,6 @@ export const deleteAllContent = extendType({
                 .promise();
             }
 
-            await prisma.content.deleteMany({ where: { userId: user.id } });
-
             content.forEach(async (val) => {
               const generatedNotionPage =
                 await prisma.generatedNotionPage.findFirst({
@@ -51,6 +49,8 @@ export const deleteAllContent = extendType({
               }
             });
           }
+
+          await prisma.content.deleteMany({ where: { userId: user.id } });
 
           return {
             response:

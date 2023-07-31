@@ -28,6 +28,16 @@ export const deleteContent = extendType({
             where: { id: contentId },
           });
 
+          const notionPage = await prisma.generatedNotionPage.findFirst({
+            where: { contentId: content.id },
+          });
+
+          if (notionPage) {
+            await prisma.generatedNotionPage.delete({
+              where: { id: notionPage.id },
+            });
+          }
+
           if (content.s3ObjectName) {
             await s3
               .deleteObject({
