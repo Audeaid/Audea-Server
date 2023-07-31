@@ -47,6 +47,16 @@ export const deleteAllContent = extendType({
                   where: { id: generatedNotionPage.id },
                 });
               }
+
+              const sharedContent = await prisma.sharedContent.findFirst({
+                where: { contentId: val.id },
+              });
+
+              if (sharedContent) {
+                await prisma.sharedContent.delete({
+                  where: { id: sharedContent.id },
+                });
+              }
             });
           }
 
