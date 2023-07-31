@@ -16,11 +16,11 @@ export const deleteUserIfRegistrationFailed = extendType({
           if (secret !== process.env.DELETE_USER_SECRET)
             throw new Error('Wrong secret!');
 
-          await prisma.user.delete({ where: { id } });
-
           await prisma.subscription.delete({ where: { userId: id } });
 
           await prisma.contentSettings.delete({ where: { userId: id } });
+
+          await prisma.user.delete({ where: { id } });
 
           return { response: 'Success' };
         } catch (e) {
