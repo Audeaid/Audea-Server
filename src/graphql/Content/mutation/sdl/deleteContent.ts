@@ -38,6 +38,16 @@ export const deleteContent = extendType({
             });
           }
 
+          const sharedContent = await prisma.sharedContent.findFirst({
+            where: { contentId: content.id },
+          });
+
+          if (sharedContent) {
+            await prisma.sharedContent.delete({
+              where: { id: sharedContent.id },
+            });
+          }
+
           if (content.s3ObjectName) {
             await s3
               .deleteObject({
