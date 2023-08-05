@@ -54,13 +54,13 @@ export const sendInvitationEmailFromUser = extendType({
 
           if (randomGenerator === 1) {
             // from furqon
-            sendEmailData.from = 'Furqon @ Audea <furqon@audea.id>';
+            sendEmailData.from = 'Furqon @ Audea <furqon@durrrian.com>';
             sendEmailData.to = email;
             sendEmailData.subject = `${user.firstName} is inviting you to try Audea! 🍙`;
             sendEmailData.html = furqonHtml;
           } else {
             // from bontel
-            sendEmailData.from = 'Rizqy from Audea <rizqy@audea.id>';
+            sendEmailData.from = 'Rizqy from Audea <rizqy@durrrian.com>';
             sendEmailData.to = email;
             sendEmailData.subject = `${user.firstName} is inviting you to try Audea! 🍙`;
             sendEmailData.html = bontelHtml;
